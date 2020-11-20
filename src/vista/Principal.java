@@ -35,7 +35,13 @@ public class Principal extends javax.swing.JFrame {
         Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(jLabel14.getWidth(),jLabel14.getHeight(),Image.SCALE_DEFAULT));
         jLabel14.setIcon(icono);
     }
-    
+    public static boolean validarCurp(String curp){
+        curp=curp.toUpperCase().trim();
+        return curp.matches("[A-Z]{4}[0-9]{6}[H,M][A-Z]{5}[0-9,A-Z]{2}");
+    }
+    public static boolean validarFecha(String fecha){
+        return fecha.matches("(^(19|[2-9][0-9])(00|04|08|12|16|20|24|28|32|36|40|44|48|52|56|60|64|68|72|76|80|84|88|92|96)[-]02[-]29$)|(^((19|20)\\d{2})[-](((0[1-9]|1[012])[-](0[1-9]|1[0-9]|2[0-8]))|((0[13578]|1[02])[-](29|30|31))|((0[4,6,9]|11)[-](29|30)))$)");
+    }
     void llena_estados(){
         controlador.Consultas consEdos;
         consEdos = new controlador.Consultas();
@@ -128,7 +134,7 @@ public class Principal extends javax.swing.JFrame {
         jTextField1.setAlignmentY(0.0F);
         jTextField1.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         getContentPane().add(jTextField1);
-        jTextField1.setBounds(490, 205, 233, 20);
+        jTextField1.setBounds(490, 195, 233, 30);
 
         CB_estados.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -179,7 +185,7 @@ public class Principal extends javax.swing.JFrame {
         txt_codpos.setAlignmentY(0.0F);
         txt_codpos.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         getContentPane().add(txt_codpos);
-        txt_codpos.setBounds(490, 155, 80, 20);
+        txt_codpos.setBounds(490, 145, 80, 30);
 
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("Código Postal");
@@ -196,7 +202,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txt_numint);
-        txt_numint.setBounds(490, 100, 103, 20);
+        txt_numint.setBounds(490, 90, 103, 30);
 
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Num. Interior");
@@ -208,7 +214,7 @@ public class Principal extends javax.swing.JFrame {
         txt_numext.setAlignmentY(0.0F);
         txt_numext.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         getContentPane().add(txt_numext);
-        txt_numext.setBounds(690, 100, 95, 20);
+        txt_numext.setBounds(690, 90, 95, 30);
 
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Num. Exterior");
@@ -220,7 +226,7 @@ public class Principal extends javax.swing.JFrame {
         txt_calle.setAlignmentY(0.0F);
         txt_calle.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         getContentPane().add(txt_calle);
-        txt_calle.setBounds(490, 45, 283, 20);
+        txt_calle.setBounds(490, 35, 283, 30);
 
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Calle");
@@ -317,10 +323,26 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        JOptionPane.showMessageDialog(null, CB_estados.getSelectedItem());
-        JOptionPane.showMessageDialog(null, CB_estados.getSelectedIndex());
-        JOptionPane.showMessageDialog(null, CB_municipios.getSelectedItem());
-        JOptionPane.showMessageDialog(null, CB_municipios.getSelectedIndex());
+        if (txt_cveemp.getText().equals("")){
+        JOptionPane.showMessageDialog(null, "Por favor ingresa la clave");
+        }
+        else if(txt_apeuno.getText().equals("") && txt_apedos.getText().equals("") ){
+        JOptionPane.showMessageDialog(null, "Por favor ingresa uno de los dos apellidos");
+
+        }
+        else if(validarCurp(txt_curp.getText()) != true){
+        JOptionPane.showMessageDialog(null, "Por favor ingresa un curp valido");
+            
+        }
+        else if(validarFecha(txt_fecing.getText()) != true){
+        JOptionPane.showMessageDialog(null, "Por favor ingresa una fecha valida aaaa-mm-dd");
+        }
+        else{
+
+        //JOptionPane.showMessageDialog(null, CB_estados.getSelectedItem());
+        //JOptionPane.showMessageDialog(null, CB_estados.getSelectedIndex());
+        //JOptionPane.showMessageDialog(null, CB_municipios.getSelectedItem());
+        //JOptionPane.showMessageDialog(null, CB_municipios.getSelectedIndex());
         Empleado datosEmpleado;
         datosEmpleado = new Empleado();
         controlador.Inserciones insEmps;
@@ -360,6 +382,7 @@ public class Principal extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Clave de usuario ya existe");
             }
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
