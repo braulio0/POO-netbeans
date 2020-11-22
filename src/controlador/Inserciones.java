@@ -17,5 +17,14 @@ public class Inserciones {
                 + "NIDESTA,NIDMUNI,CSTATUS) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         return sql;
     }
+    public String ModificarEmpleado( ){
+        String sql;
+        sql = "UPDATE DDATEMP SET CNOMBRE=?,CAPEUNO=?"
+                + ",CAPEDOS=?,CCURPEM=?,DFECING=?"
+                +",CNMCALL=?,CNUMEXT=? ,CNUMINT=? ,CCOLONI=? ,CCODPOS=?"
+                + ",NIDESTA=? ,NIDMUNI=? ,CSTATUS=?"
+                + "WHERE CCVEEMP=?";
+        return sql;
+    }
     
 }

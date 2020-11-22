@@ -33,9 +33,5 @@ public class Consultas {
                 + " WHERE ccveemp = '" + idEmp+"'";
         return sql;    }
     
-    public String consultaEstado(int idEdo) {
-            String sql = "SELECT * "
-                + " FROM ddatemp "
-                + " WHERE ccveemp = "+ idEdo;
-        return sql;    }
+    
 }

@@ -31,11 +31,51 @@ public class ConsultaEmpleados extends javax.swing.JFrame {
     public ConsultaEmpleados() {
         initComponents();
         llena_estados();
+        inhabilitar();
          ImageIcon imagen = new ImageIcon( "src/imagen/fondo.jpg");
         Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(jLabel14.getWidth(),jLabel14.getHeight(),Image.SCALE_DEFAULT));
         jLabel14.setIcon(icono);
     }
+    public static boolean validarCurp(String curp){
+        curp=curp.toUpperCase().trim();
+        return curp.matches("[A-Z]{4}[0-9]{6}[H,M][A-Z]{5}[0-9,A-Z]{2}");
+    }
+    public static boolean validarFecha(String fecha){
+        return fecha.matches("(^(19|[2-9][0-9])(00|04|08|12|16|20|24|28|32|36|40|44|48|52|56|60|64|68|72|76|80|84|88|92|96)[-]02[-]29$)|(^((19|20)\\d{2})[-](((0[1-9]|1[012])[-](0[1-9]|1[0-9]|2[0-8]))|((0[13578]|1[02])[-](29|30|31))|((0[4,6,9]|11)[-](29|30)))$)");
+    }
+    void habilitar(){
+        txt_nombre.setEnabled(true);
+        txt_apeuno.setEnabled(true);
+        txt_apedos.setEnabled(true);
+        txt_curp.setEnabled(true);
+        txt_fecing.setEnabled(true);
+        txt_calle.setEnabled(true);
+        txt_numext.setEnabled(true);
+        txt_numint.setEnabled(true);
+        txt_codpos.setEnabled(true);
+        txt_coloni.setEnabled(true);
+        CB_estados.setEnabled(true);
+        CB_municipios.setEnabled(true);
+        jButton1.setEnabled(true);
+    }
+    void inhabilitar(){
+        txt_nombre.setEnabled(false);
+        txt_apeuno.setEnabled(false);
+        txt_apedos.setEnabled(false);
+        txt_curp.setEnabled(false);
+        txt_fecing.setEnabled(false);
+        txt_calle.setEnabled(false);
+        txt_numext.setEnabled(false);
+        txt_numint.setEnabled(false);
+        txt_codpos.setEnabled(false);
+        txt_coloni.setEnabled(false);
+        CB_estados.setEnabled(false);
+        CB_municipios.setEnabled(false);
+        jButton1.setEnabled(false);
+    }
     void llenaDatos(){
+        txt_cveemp.setEnabled(true);
+        inhabilitar();
         Empleado datosEmpleado;
         datosEmpleado = new Empleado();
         controlador.Consultas consEmps;
@@ -69,7 +109,7 @@ public class ConsultaEmpleados extends javax.swing.JFrame {
             txt_codpos.setText(datosEmpleado.getCCODPOS());
             txt_coloni.setText(datosEmpleado.getCCOLONI());
             CB_estados.setSelectedIndex(datosEmpleado.getNIDESTA()-1);
-            CB_municipios.setSelectedIndex(datosEmpleado.getNIDMUNI());
+            CB_municipios.setSelectedIndex(datosEmpleado.getNIDMUNI()-1);
             
              }
             
@@ -163,14 +203,14 @@ public class ConsultaEmpleados extends javax.swing.JFrame {
         getContentPane().add(jButton2);
         jButton2.setBounds(460, 390, 69, 24);
 
-        jButton1.setText("Consultar");
+        jButton1.setText("Guardar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(310, 390, 100, 24);
+        jButton1.setBounds(730, 390, 100, 24);
 
         jButton4.setText("Modificar");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -391,14 +431,29 @@ public class ConsultaEmpleados extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       if (txt_cveemp.getText().equals("")){
+        JOptionPane.showMessageDialog(null, "Por favor ingresa la clave");
+        }
+        else if(txt_apeuno.getText().equals("") && txt_apedos.getText().equals("") ){
+        JOptionPane.showMessageDialog(null, "Por favor ingresa uno de los dos apellidos");
+
+        }
+        else if(validarCurp(txt_curp.getText()) != true){
+        JOptionPane.showMessageDialog(null, "Por favor ingresa un curp valido");
+            
+        }
+        else if(validarFecha(txt_fecing.getText()) != true){
+        JOptionPane.showMessageDialog(null, "Por favor ingresa una fecha valida aaaa-mm-dd");
+        }
+        else{
         //JOptionPane.showMessageDialog(null, CB_estados.getSelectedItem());
         //JOptionPane.showMessageDialog(null, CB_estados.getSelectedIndex());
         //JOptionPane.showMessageDialog(null, CB_municipios.getSelectedItem());
         //JOptionPane.showMessageDialog(null, CB_municipios.getSelectedIndex());
         Empleado datosEmpleado;
         datosEmpleado = new Empleado();
-        controlador.Inserciones insEmps;
-        insEmps = new controlador.Inserciones();
+        controlador.Inserciones updEmps;
+        updEmps = new controlador.Inserciones();
         datosEmpleado.setCCVEEMP(txt_cveemp.getText());
         datosEmpleado.setCNOMBRE(txt_nombre.getText());
         datosEmpleado.setCAPEUNO(txt_apeuno.getText());
@@ -412,30 +467,30 @@ public class ConsultaEmpleados extends javax.swing.JFrame {
         datosEmpleado.setNIDESTA(CB_estados.getSelectedIndex() + 1);
         datosEmpleado.setNIDMUNI(CB_municipios.getSelectedIndex() + 1);
         try {
-            PreparedStatement pps = cn.prepareStatement(insEmps.insertEmpleados());
-            pps.setString(1, datosEmpleado.getCCVEEMP());
-            pps.setString(2, datosEmpleado.getCNOMBRE());
-            pps.setString(3, datosEmpleado.getCAPEUNO());
-            pps.setString(4, datosEmpleado.getCAPEDOS());
-            pps.setString(5, datosEmpleado.getCCURPEM());
-            pps.setString(6, datosEmpleado.getDFECING());
-            pps.setString(7, datosEmpleado.getCNMCALL());
-            pps.setString(8, datosEmpleado.getCNUMEXT());
-            pps.setString(9, datosEmpleado.getCNUMINT());
-            pps.setString(10, datosEmpleado.getCCOLONI());
-            pps.setString(11, datosEmpleado.getCCODPOS());
-            pps.setInt(12, datosEmpleado.getNIDESTA());
-            pps.setInt(13, datosEmpleado.getNIDMUNI());
-            pps.setString(14, "A");
+            PreparedStatement pps = cn.prepareStatement(updEmps.ModificarEmpleado());
+            pps.setString(1, datosEmpleado.getCNOMBRE());
+            pps.setString(2, datosEmpleado.getCAPEUNO());
+            pps.setString(3, datosEmpleado.getCAPEDOS());
+            pps.setString(4, datosEmpleado.getCCURPEM());
+            pps.setString(5, datosEmpleado.getDFECING());
+            pps.setString(6, datosEmpleado.getCNMCALL());
+            pps.setString(7, datosEmpleado.getCNUMEXT());
+            pps.setString(8, datosEmpleado.getCNUMINT());
+            pps.setString(9, datosEmpleado.getCCOLONI());
+            pps.setString(10, datosEmpleado.getCCODPOS());
+            pps.setInt(11, datosEmpleado.getNIDESTA());
+            pps.setInt(12, datosEmpleado.getNIDMUNI());
+            pps.setString(13, "A");
+            pps.setString(14, datosEmpleado.getCCVEEMP());
             pps.executeUpdate();
-            JOptionPane.showMessageDialog(this, "Empleado regustrado con exito");
+            JOptionPane.showMessageDialog(this, "Empleado Modificado con exito");
         } catch (SQLException ex) {
             if(ex.getErrorCode() == MYSQL_DUPLICATE_PK ){
                 JOptionPane.showMessageDialog(this, "Clave de usuario ya existe");
             }
             Logger.getLogger(ConsultaEmpleados.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void CB_estadosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CB_estadosKeyPressed
@@ -493,7 +548,9 @@ public class ConsultaEmpleados extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+        txt_cveemp.setEnabled(false);
+        habilitar();
+
     }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
