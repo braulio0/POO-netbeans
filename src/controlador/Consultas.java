@@ -25,4 +25,17 @@ public class Consultas {
                 + " ORDER BY NIDMUNI";
         return sql;
     }
+    
+
+    public String consultaEmpleados(String idEmp) {
+            String sql = "SELECT * "
+                + " FROM ddatemp "
+                + " WHERE ccveemp = '" + idEmp+"'";
+        return sql;    }
+    
+    public String consultaEstado(int idEdo) {
+            String sql = "SELECT * "
+                + " FROM ddatemp "
+                + " WHERE ccveemp = "+ idEdo;
+        return sql;    }
 }

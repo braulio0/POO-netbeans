@@ -22,25 +22,61 @@ import modelo.Empleado;
  *
  * @author DANMAR
  */
-public class Principal extends javax.swing.JFrame {
+public class ConsultaEmpleados extends javax.swing.JFrame {
     public static final int MYSQL_DUPLICATE_PK = 1062;
     //Se establece la conexión con la base de datos
     controlador.Conexion con = new controlador.Conexion();
     Connection cn  = con.conexion();
     
-    public Principal() {
+    public ConsultaEmpleados() {
         initComponents();
         llena_estados();
          ImageIcon imagen = new ImageIcon( "src/imagen/fondo.jpg");
         Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(jLabel14.getWidth(),jLabel14.getHeight(),Image.SCALE_DEFAULT));
         jLabel14.setIcon(icono);
     }
-    public static boolean validarCurp(String curp){
-        curp=curp.toUpperCase().trim();
-        return curp.matches("[A-Z]{4}[0-9]{6}[H,M][A-Z]{5}[0-9,A-Z]{2}");
-    }
-    public static boolean validarFecha(String fecha){
-        return fecha.matches("(^(19|[2-9][0-9])(00|04|08|12|16|20|24|28|32|36|40|44|48|52|56|60|64|68|72|76|80|84|88|92|96)[-]02[-]29$)|(^((19|20)\\d{2})[-](((0[1-9]|1[012])[-](0[1-9]|1[0-9]|2[0-8]))|((0[13578]|1[02])[-](29|30|31))|((0[4,6,9]|11)[-](29|30)))$)");
+    void llenaDatos(){
+        Empleado datosEmpleado;
+        datosEmpleado = new Empleado();
+        controlador.Consultas consEmps;
+        consEmps = new controlador.Consultas();
+        Statement st;
+        
+        try {
+            st = cn.createStatement();
+            ResultSet rs = st.executeQuery(consEmps.consultaEmpleados(txt_cveemp.getText()));
+             while(rs.next()){
+            datosEmpleado.setCNOMBRE(rs.getString("cnombre"));
+            datosEmpleado.setCAPEUNO(rs.getString("capeuno"));
+            datosEmpleado.setCAPEDOS(rs.getString("capedos"));
+            datosEmpleado.setCCURPEM(rs.getString("ccurpem"));
+            datosEmpleado.setDFECING(rs.getString("dfecing"));
+            datosEmpleado.setCNMCALL(rs.getString("cnmcall"));
+            datosEmpleado.setCNUMEXT(rs.getString("cnumext"));
+            datosEmpleado.setCNUMINT(rs.getString("cnumint"));
+            datosEmpleado.setCCODPOS(rs.getString("ccodpos"));
+            datosEmpleado.setCCOLONI(rs.getString("ccoloni"));
+            datosEmpleado.setNIDESTA(Integer.parseInt(rs.getString("nidesta")));
+            datosEmpleado.setNIDMUNI(Integer.parseInt(rs.getString("nidmuni")));
+            txt_nombre.setText(datosEmpleado.getCNOMBRE());
+            txt_apeuno.setText(datosEmpleado.getCAPEUNO());
+            txt_apedos.setText(datosEmpleado.getCAPEDOS());
+            txt_curp.setText(datosEmpleado.getCCURPEM());
+            txt_fecing.setText(datosEmpleado.getDFECING());
+            txt_calle.setText(datosEmpleado.getCNMCALL());
+            txt_numext.setText(datosEmpleado.getCNUMEXT());
+            txt_numint.setText(datosEmpleado.getCNUMINT());
+            txt_codpos.setText(datosEmpleado.getCCODPOS());
+            txt_coloni.setText(datosEmpleado.getCCOLONI());
+            CB_estados.setSelectedIndex(datosEmpleado.getNIDESTA()-1);
+            CB_municipios.setSelectedIndex(datosEmpleado.getNIDMUNI());
+            
+             }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ConsultaEmpleados.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
     void llena_estados(){
         controlador.Consultas consEdos;
@@ -53,7 +89,7 @@ public class Principal extends javax.swing.JFrame {
                 CB_estados.addItem(rs.getString(1));
             }
         } catch (SQLException ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ConsultaEmpleados.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -69,7 +105,7 @@ public class Principal extends javax.swing.JFrame {
                 CB_municipios.addItem(rs.getString(1));
             }
         } catch (SQLException ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ConsultaEmpleados.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -83,13 +119,14 @@ public class Principal extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         txt_coloni = new javax.swing.JTextField();
         CB_estados = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         CB_municipios = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         txt_codpos = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
@@ -109,7 +146,6 @@ public class Principal extends javax.swing.JFrame {
         txt_apedos = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         txt_curp = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         txt_fecing = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
@@ -125,32 +161,39 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton2);
-        jButton2.setBounds(340, 380, 69, 24);
+        jButton2.setBounds(460, 390, 69, 24);
 
-        jButton3.setText("Modifiacar Empleado");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton3);
-        jButton3.setBounds(460, 380, 160, 24);
-
-        jButton1.setText("Guardar");
+        jButton1.setText("Consultar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(190, 380, 75, 24);
+        jButton1.setBounds(310, 390, 100, 24);
 
+        jButton4.setText("Modificar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton4);
+        jButton4.setBounds(580, 390, 100, 24);
+
+        txt_coloni.setToolTipText("");
         txt_coloni.setActionCommand("<Not Set>");
         txt_coloni.setAlignmentX(0.0F);
         txt_coloni.setAlignmentY(0.0F);
         txt_coloni.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        txt_coloni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_coloniActionPerformed(evt);
+            }
+        });
         getContentPane().add(txt_coloni);
         txt_coloni.setBounds(490, 195, 233, 30);
+        txt_coloni.getAccessibleContext().setAccessibleName("");
 
         CB_estados.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -190,6 +233,15 @@ public class Principal extends javax.swing.JFrame {
         jLabel1.setText("Seleccione el Estado");
         getContentPane().add(jLabel1);
         jLabel1.setBounds(360, 250, 390, 20);
+
+        jButton3.setText("Consultar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton3);
+        jButton3.setBounds(300, 30, 120, 24);
 
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Seleccione el Municipio");
@@ -312,16 +364,7 @@ public class Principal extends javax.swing.JFrame {
         txt_curp.setAlignmentY(0.0F);
         txt_curp.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         getContentPane().add(txt_curp);
-        txt_curp.setBounds(170, 210, 153, 30);
-
-        jButton4.setText("Consultar Empleado");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton4);
-        jButton4.setBounds(660, 380, 160, 24);
+        txt_curp.setBounds(170, 210, 190, 30);
 
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Fecha de Ingreso");
@@ -342,28 +385,12 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel14.setText("fondo");
         getContentPane().add(jLabel14);
-        jLabel14.setBounds(-3, 0, 910, 430);
+        jLabel14.setBounds(0, 0, 910, 430);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (txt_cveemp.getText().equals("")){
-        JOptionPane.showMessageDialog(null, "Por favor ingresa la clave");
-        }
-        else if(txt_apeuno.getText().equals("") && txt_apedos.getText().equals("") ){
-        JOptionPane.showMessageDialog(null, "Por favor ingresa uno de los dos apellidos");
-
-        }
-        else if(validarCurp(txt_curp.getText()) != true){
-        JOptionPane.showMessageDialog(null, "Por favor ingresa un curp valido");
-            
-        }
-        else if(validarFecha(txt_fecing.getText()) != true){
-        JOptionPane.showMessageDialog(null, "Por favor ingresa una fecha valida aaaa-mm-dd");
-        }
-        else{
-
         //JOptionPane.showMessageDialog(null, CB_estados.getSelectedItem());
         //JOptionPane.showMessageDialog(null, CB_estados.getSelectedIndex());
         //JOptionPane.showMessageDialog(null, CB_municipios.getSelectedItem());
@@ -382,7 +409,6 @@ public class Principal extends javax.swing.JFrame {
         datosEmpleado.setCNUMEXT(txt_numext.getText());
         datosEmpleado.setCNUMINT(txt_numint.getText());
         datosEmpleado.setCCODPOS(txt_codpos.getText());
-        datosEmpleado.setCCOLONI(txt_coloni.getText());
         datosEmpleado.setNIDESTA(CB_estados.getSelectedIndex() + 1);
         datosEmpleado.setNIDMUNI(CB_municipios.getSelectedIndex() + 1);
         try {
@@ -407,9 +433,9 @@ public class Principal extends javax.swing.JFrame {
             if(ex.getErrorCode() == MYSQL_DUPLICATE_PK ){
                 JOptionPane.showMessageDialog(this, "Clave de usuario ya existe");
             }
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ConsultaEmpleados.class.getName()).log(Level.SEVERE, null, ex);
         }
-        }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void CB_estadosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CB_estadosKeyPressed
@@ -445,16 +471,12 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_numintActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-       ConsultaEmpleados ce = new ConsultaEmpleados();
-       ce.setVisible(true);
-       this.setVisible(false);
+        llenaDatos();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-       ConsultaEmpleados ce = new ConsultaEmpleados();
-        ce.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_jButton4ActionPerformed
+    private void txt_coloniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_coloniActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_coloniActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         txt_cveemp.setText("");
@@ -468,8 +490,11 @@ public class Principal extends javax.swing.JFrame {
         txt_numint.setText("");
         txt_codpos.setText("");
         txt_coloni.setText("");
-
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -488,20 +513,21 @@ public class Principal extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultaEmpleados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultaEmpleados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultaEmpleados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultaEmpleados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Principal().setVisible(true);
+                new ConsultaEmpleados().setVisible(true);
             }
         });
     }

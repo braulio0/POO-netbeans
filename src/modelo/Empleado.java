@@ -186,17 +186,17 @@ public class Empleado {
     /**
      * @return the NIDESTA
      */
+    
     public int getNIDESTA() {
         return NIDESTA;
     }
-
     /**
      * @param NIDESTA the NIDESTA to set
      */
     public void setNIDESTA(int NIDESTA) {
         this.NIDESTA = NIDESTA;
     }
-
+   
     /**
      * @return the NIDMUNI
      */
@@ -224,4 +224,6 @@ public class Empleado {
     public void setCSTATUS(String CSTATUS) {
         this.CSTATUS = CSTATUS;
     }
+
+    
 }
