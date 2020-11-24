@@ -11,7 +11,7 @@ import java.sql.Statement;
 
 /**
  *
- * @author DANMAR
+ * @author elias
  */
 public class Conexion {
     Connection cn;

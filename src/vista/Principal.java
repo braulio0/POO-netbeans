@@ -20,7 +20,7 @@ import modelo.Empleado;
 
 /**
  *
- * @author DANMAR
+ * @author elias
  */
 public class Principal extends javax.swing.JFrame {
     public static final int MYSQL_DUPLICATE_PK = 1062;

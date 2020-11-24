@@ -7,7 +7,7 @@ package controlador;
 
 /**
  *
- * @author DANMAR
+ * @author elias
  */
 public class Consultas {
    

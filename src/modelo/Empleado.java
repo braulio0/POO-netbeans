@@ -7,7 +7,7 @@ package modelo;
 
 /**
  *
- * @author DANMAR
+ * @author elias
  */
 public class Empleado {
     private String CCVEEMP;

@@ -6,16 +6,33 @@
 package vista;
 
 import java.awt.Image;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import static java.lang.System.exit;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import modelo.Empleado;
+import modelo.RegistroAsistencia;
 /**
  *
  * @author elias
  */
 public class Inicio extends javax.swing.JFrame {
-
+    public static final int MYSQL_DUPLICATE_PK   = 1062;
+    public static final int MYSQL_FMTO_ERRONEO   = 1292;
+    public static final int MYSQL_FOREIGN_KEY    = 1452;
+    //Se establece la conexión con la base de datos
+    controlador.Conexion con = new controlador.Conexion();
+    Connection cn  = con.conexion();
     /**
      * Creates new form Inicio
      */
@@ -42,7 +59,79 @@ public class Inicio extends javax.swing.JFrame {
         
     }
     
-
+private String abrirArchivo(){
+        
+        String aux   = "";   
+        String texto = "";
+        String cveEmp = "";
+        String fecReg = "";
+        String numBio = "";
+        int c_graba2 = 0;
+        int c_duplica2 = 0;
+        int c_fmtoerr = 0;
+        int c_lei = 0;
+        int c_fk = 0;
+        try{
+            /**llamamos el metodo que permite cargar la ventana*/
+            JFileChooser file=new JFileChooser();
+            file.showOpenDialog(this);
+            /**abrimos el archivo seleccionado*/
+            File abre = file.getSelectedFile();
+            /**recorremos el archivo, lo leemos para plasmarlo en el area de texto*/
+            if(abre != null){     
+                FileReader archivos = new FileReader(abre);
+                BufferedReader lee  = new BufferedReader(archivos);
+                while((aux = lee.readLine()) != null){
+                    //para cada registro se extra la información para el insert
+                    c_lei++;
+                    cveEmp = aux.substring(0,6);
+                    fecReg = "20" + aux.substring(10,12) + "-" + aux.substring(8,10) +
+                         "-" + aux.substring(6,8) + " " + aux.substring(12,14) + ":" + 
+                         aux.substring(14,16) + ":" + aux.substring(16,18);
+                    numBio = aux.substring(18,19);   
+                  RegistroAsistencia datosRegAsi;
+                  datosRegAsi = new RegistroAsistencia();
+                  controlador.Inserciones insertRegistroAsistencia;
+                  insertRegistroAsistencia = new controlador.Inserciones();
+                  datosRegAsi.setCCVEEMP(cveEmp);
+                  datosRegAsi.setDFECREG(fecReg);
+                  datosRegAsi.setCNUMBIO(numBio);
+                  datosRegAsi.setCSTATUS("R");
+                  try {
+                    PreparedStatement pps = cn.prepareStatement(insertRegistroAsistencia.insertRegistroAsistencia());
+                    pps.setString(1, datosRegAsi.getCCVEEMP());
+                    pps.setString(2, datosRegAsi.getDFECREG());
+                    pps.setString(3, datosRegAsi.getCNUMBIO());
+                    pps.setString(4, datosRegAsi.getCSTATUS());
+                    pps.executeUpdate();
+                    c_graba2++;
+                  } catch (SQLException ex) {
+                    if(ex.getErrorCode() == MYSQL_DUPLICATE_PK ){
+                        c_duplica2++;
+                    }
+                    if(ex.getErrorCode() == MYSQL_FMTO_ERRONEO ){
+                        c_fmtoerr++;
+                    }
+                    if(ex.getErrorCode() == MYSQL_FOREIGN_KEY ){
+                        c_fk++;
+                    }
+                    Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                lee.close();
+            }    
+        }catch(IOException ex){
+            JOptionPane.showMessageDialog(null,ex+"" +
+            "\nNo se ha encontrado el archivo",
+            "ADVERTENCIA!!!",JOptionPane.WARNING_MESSAGE);
+    }
+    JOptionPane.showMessageDialog(this, "Leidos " + c_lei);
+    JOptionPane.showMessageDialog(this, "Grabados " + c_graba2);
+    JOptionPane.showMessageDialog(this, "Duplicados " + c_duplica2);
+    JOptionPane.showMessageDialog(this, "Error por formato " + c_fmtoerr);
+    JOptionPane.showMessageDialog(this, "Error por no estar en datos de empleado " + c_fk);
+    return texto;//El texto se almacena en el JTextArea
+}
 
 
 
@@ -97,13 +186,18 @@ public class Inicio extends javax.swing.JFrame {
         getContentPane().add(jButton4);
         jButton4.setBounds(120, 460, 73, 24);
 
-        jButton5.setText("jButton1");
+        jButton5.setText("Subir Archivo de asistencia");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton5);
-        jButton5.setBounds(640, 460, 73, 24);
+        jButton5.setBounds(320, 460, 200, 24);
 
         jButton6.setText("jButton1");
         getContentPane().add(jButton6);
-        jButton6.setBounds(380, 460, 73, 24);
+        jButton6.setBounds(660, 460, 73, 24);
 
         jLabel8.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
@@ -171,6 +265,11 @@ public class Inicio extends javax.swing.JFrame {
         this.setVisible(false);
 
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        abrirArchivo();
+        JOptionPane.showMessageDialog(this, "Proceso Finalizado");
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments

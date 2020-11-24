@@ -7,7 +7,7 @@ package controlador;
 
 /**
  *
- * @author DANMAR
+ * @author elias
  */
 public class Inserciones {
     
@@ -24,6 +24,11 @@ public class Inserciones {
                 +",CNMCALL=?,CNUMEXT=? ,CNUMINT=? ,CCOLONI=? ,CCODPOS=?"
                 + ",NIDESTA=? ,NIDMUNI=? ,CSTATUS=?"
                 + "WHERE CCVEEMP=?";
+        return sql;
+    }
+     public String insertRegistroAsistencia(){
+        String sql = "INSERT INTO PREGASI (CCVEEMP,DFECREG,CNUMBIO,CSTATUS) "
+                + "VALUES(?,?,?,?)";
         return sql;
     }
     
