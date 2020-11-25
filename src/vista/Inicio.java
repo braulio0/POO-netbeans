@@ -165,9 +165,14 @@ private String abrirArchivo(){
         setPreferredSize(new java.awt.Dimension(833, 534));
         getContentPane().setLayout(null);
 
-        jButton1.setText("jButton1");
+        jButton1.setText("Registrar Horario");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton1);
-        jButton1.setBounds(380, 250, 73, 24);
+        jButton1.setBounds(350, 250, 140, 24);
 
         jButton2.setText("jButton1");
         getContentPane().add(jButton2);
@@ -260,7 +265,6 @@ private String abrirArchivo(){
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         Principal pn = new Principal();
-        Inicio in = new Inicio();
         pn.setVisible(true);
         this.setVisible(false);
 
@@ -270,6 +274,13 @@ private String abrirArchivo(){
         abrirArchivo();
         JOptionPane.showMessageDialog(this, "Proceso Finalizado");
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        RegistrarHorario rh = new RegistrarHorario();
+        rh.setVisible(true);
+        this.setVisible(false);
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

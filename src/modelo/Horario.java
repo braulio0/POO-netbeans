@@ -10,10 +10,12 @@ package modelo;
  * @author elias
  */
 public class Horario {
-    private int    NIDHORA;
-    private String CDESCHR;
-    private String CSTATUS;
-
+    private int     NIDHORA;
+    private String  CDESCHR;
+    private String  CSTATUS;
+    private int     NDIASEM; 
+    private String  CHORENT;
+    private String  CHORSAL;
     /**
      * @return the NIDHORA
      */
@@ -54,5 +56,44 @@ public class Horario {
      */
     public void setCSTATUS(String CSTATUS) {
         this.CSTATUS = CSTATUS;
+    }
+    
+    public int getNDIASEM() {
+        return NDIASEM;
+    }
+
+    /**
+     * @param NDIASEM the NIDHORA to set
+     */
+    public void setNDIASEM(int NDIASEM) {
+        this.NDIASEM = NDIASEM;
+    }
+
+    /**
+     * @return the CHORENT
+     */
+    public String getCHORENT() {
+        return CHORENT;
+    }
+
+    /**
+     * @param CDESCHR the CDESCHR to set
+     */
+    public void setCHORENT(String CHORENT) {
+        this.CHORENT = CHORENT;
+    }
+
+    /**
+     * @return the CHORSAL
+     */
+    public String getCHORSAL() {
+        return CHORSAL;
+    }
+
+    /**
+     * @param CHORSAL the CSTATUS to set
+     */
+    public void setCHORSAL(String CHORSAL) {
+        this.CHORSAL = CHORSAL;
     }
 }

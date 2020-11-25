@@ -26,6 +26,18 @@ public class Inserciones {
                 + "WHERE CCVEEMP=?";
         return sql;
     }
+    public String insertHorario(){
+        String sql;
+        sql = "INSERT INTO chorars (NIDHORA,CDESCHR,CSTATUS)"
+                + "VALUES(?,?,?);";
+        return sql;
+    }
+    public String insertHorarioHoras(){
+        String sql;
+        sql = "INSERT INTO DDETHOR (NIDHORA,NDIASEM,CHORENT,CHORSAL,CSTATUS)"
+                + "VALUES(?,?,?,?,?);";
+        return sql;
+    }
      public String insertRegistroAsistencia(){
         String sql = "INSERT INTO PREGASI (CCVEEMP,DFECREG,CNUMBIO,CSTATUS) "
                 + "VALUES(?,?,?,?)";
