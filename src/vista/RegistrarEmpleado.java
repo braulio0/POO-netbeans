@@ -22,13 +22,13 @@ import modelo.Empleado;
  *
  * @author elias
  */
-public class Principal extends javax.swing.JFrame {
+public class RegistrarEmpleado extends javax.swing.JFrame {
     public static final int MYSQL_DUPLICATE_PK = 1062;
     //Se establece la conexión con la base de datos
     controlador.Conexion con = new controlador.Conexion();
     Connection cn  = con.conexion();
     
-    public Principal() {
+    public RegistrarEmpleado() {
         initComponents();
         llena_estados();
          ImageIcon imagen = new ImageIcon( "src/imagen/fondo.jpg");
@@ -53,7 +53,7 @@ public class Principal extends javax.swing.JFrame {
                 CB_estados.addItem(rs.getString(1));
             }
         } catch (SQLException ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RegistrarEmpleado.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -69,7 +69,7 @@ public class Principal extends javax.swing.JFrame {
                 CB_municipios.addItem(rs.getString(1));
             }
         } catch (SQLException ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RegistrarEmpleado.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -112,6 +112,7 @@ public class Principal extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         txt_fecing = new javax.swing.JTextField();
+        jButton5 = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -340,6 +341,15 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().add(txt_fecing);
         txt_fecing.setBounds(170, 250, 86, 30);
 
+        jButton5.setText("Inicio");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton5);
+        jButton5.setBounds(50, 380, 59, 24);
+
         jLabel14.setText("fondo");
         getContentPane().add(jLabel14);
         jLabel14.setBounds(-3, 0, 910, 430);
@@ -407,7 +417,7 @@ public class Principal extends javax.swing.JFrame {
             if(ex.getErrorCode() == MYSQL_DUPLICATE_PK ){
                 JOptionPane.showMessageDialog(this, "Clave de usuario ya existe");
             }
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RegistrarEmpleado.class.getName()).log(Level.SEVERE, null, ex);
         }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -471,6 +481,12 @@ public class Principal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        Inicio ini = new Inicio();
+        ini.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton5ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -488,20 +504,21 @@ public class Principal extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistrarEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistrarEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistrarEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistrarEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Principal().setVisible(true);
+                new RegistrarEmpleado().setVisible(true);
             }
         });
     }
@@ -513,6 +530,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

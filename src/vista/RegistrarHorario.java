@@ -25,7 +25,7 @@ import modelo.Horario;
  */
 public class RegistrarHorario extends javax.swing.JFrame {
     private int limite = 100;
-    public int mensaje = 1, dia = 0;
+    public int mensaje = 1, dia = 0, horario=1, horario1=1;
     
     public static final int MYSQL_DUPLICATE_PK = 1062;
     public static final int MYSQL_FOREIGN_KEY    = 1452;
@@ -96,10 +96,37 @@ void horario(){
         controlador.Inserciones insHor;
         insHor = new controlador.Inserciones();
             datosHorario.setNIDHORA(Integer.parseInt(txt_IdHorario.getText()));
+            datosHorario.setNDIASEM(CB_Dias.getSelectedIndex()+1);
+            datosHorario.setCHORENT(txt_horasE.getText()+":"+txt_minE.getText());
+            datosHorario.setCHORSAL(txt_HorasS.getText()+":"+txt_MinS.getText());
+            datosHorario.setCSTATUS(CB_Status.getItemAt(CB_Status.getSelectedIndex()));
+            
+         if (txt_IdHorario.getText().equals("")){
+        JOptionPane.showMessageDialog(null, "Por favor ingresa la clave del horario");
+        }
+         else if (txt_IdHorario.getText().equals("")){
+        JOptionPane.showMessageDialog(null, "Por favor ingresa la clave del horario");
+        
+        }
+       
+        else if( validafecha(datosHorario.getCHORENT()) != true){
+        JOptionPane.showMessageDialog(null, "Por favor ingresa una Hora valida para la entrada");
+         horario ++;
+        }
+        else if(validafecha(datosHorario.getCHORSAL()) != true){
+        JOptionPane.showMessageDialog(null, "Por favor ingresa una hora valida para la salida");
+        horario1 ++;
+        }
+      else{
+            
+            datosHorario.setNIDHORA(Integer.parseInt(txt_IdHorario.getText()));
             datosHorario.setCDESCHR(txt_desHor.getText());
             datosHorario.setCSTATUS(CB_Status.getItemAt(CB_Status.getSelectedIndex()));
-            JOptionPane.showMessageDialog(this, datosHorario.getCSTATUS());
+        
+            //JOptionPane.showMessageDialog(this, datosHorario.getCSTATUS());
         try {
+            horario = 1;
+            horario1 = 1;
             PreparedStatement pps = cn.prepareStatement(insHor.insertHorario());
             pps.setInt(1, datosHorario.getNIDHORA());
             pps.setString(2,datosHorario.getCDESCHR());
@@ -112,11 +139,11 @@ void horario(){
             }
             Logger.getLogger(ConsultaEmpleados.class.getName()).log(Level.SEVERE, null, ex);
         }
+         }
 }
 
 void datosHorario(){
-    if (dia<=7){
-    Horario datosHorario;
+     Horario datosHorario;
         datosHorario = new Horario();
         controlador.Inserciones insdetHor;
         insdetHor = new controlador.Inserciones();
@@ -125,7 +152,23 @@ void datosHorario(){
             datosHorario.setCHORENT(txt_horasE.getText()+":"+txt_minE.getText());
             datosHorario.setCHORSAL(txt_HorasS.getText()+":"+txt_MinS.getText());
             datosHorario.setCSTATUS(CB_Status.getItemAt(CB_Status.getSelectedIndex()));
-            
+    if (txt_IdHorario.getText().equals("")){
+        JOptionPane.showMessageDialog(null, "Por favor ingresa la clave del horario");
+        }
+       
+        else if( validafecha(datosHorario.getCHORENT()) != true){
+            if(horario <= 1){
+        JOptionPane.showMessageDialog(null, "Por favor ingresa una Hora valida para la entrada");
+            }
+        }
+        else if(validafecha(datosHorario.getCHORSAL()) != true){
+            if (horario1 <=1){
+        JOptionPane.showMessageDialog(null, "Por favor ingresa una hora valida para la salida");
+            }
+        }
+        else{
+    if (dia<=7){
+               
         try {
             PreparedStatement pps = cn.prepareStatement(insdetHor.insertHorarioHoras());
             pps.setInt(1, datosHorario.getNIDHORA());
@@ -147,8 +190,13 @@ void datosHorario(){
         dia+=1;
         JOptionPane.showMessageDialog(this, "Agrega los demas dias llevas " + dia);
     }
+    else{
         JOptionPane.showMessageDialog(this, "Hasta el dia de hoy solo existen 7 dias en una semana no puedes agregar mas de 7");
-}
+    }
+        }
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -182,6 +230,7 @@ void datosHorario(){
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -316,7 +365,7 @@ void datosHorario(){
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(180, 420, 130, 30);
+        jButton1.setBounds(310, 420, 130, 30);
 
         jButton2.setText("Asignar dia");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -325,7 +374,7 @@ void datosHorario(){
             }
         });
         getContentPane().add(jButton2);
-        jButton2.setBounds(370, 420, 120, 30);
+        jButton2.setBounds(500, 420, 120, 30);
 
         jButton3.setText("Limpiar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -334,7 +383,7 @@ void datosHorario(){
             }
         });
         getContentPane().add(jButton3);
-        jButton3.setBounds(540, 420, 100, 30);
+        jButton3.setBounds(670, 420, 100, 30);
 
         jButton4.setText("Nueo Horario");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -343,7 +392,16 @@ void datosHorario(){
             }
         });
         getContentPane().add(jButton4);
-        jButton4.setBounds(20, 420, 110, 30);
+        jButton4.setBounds(150, 420, 110, 30);
+
+        jButton5.setText("Inicio");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton5);
+        jButton5.setBounds(10, 420, 80, 30);
 
         jLabel1.setText("jLabel1");
         getContentPane().add(jLabel1);
@@ -425,6 +483,12 @@ public void keyReleased(KeyEvent arg0) {
         dia=0;
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        Inicio ini = new Inicio();
+        ini.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton5ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -467,6 +531,7 @@ public void keyReleased(KeyEvent arg0) {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

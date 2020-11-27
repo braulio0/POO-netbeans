@@ -115,7 +115,7 @@ private String abrirArchivo(){
                     if(ex.getErrorCode() == MYSQL_FOREIGN_KEY ){
                         c_fk++;
                     }
-                    Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(RegistrarEmpleado.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
                 lee.close();
@@ -264,7 +264,7 @@ private String abrirArchivo(){
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        Principal pn = new Principal();
+        RegistrarEmpleado pn = new RegistrarEmpleado();
         pn.setVisible(true);
         this.setVisible(false);
 
