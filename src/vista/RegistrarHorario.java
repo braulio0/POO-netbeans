@@ -16,7 +16,6 @@ import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import modelo.Empleado;
 import modelo.Horario;
 
 /**
@@ -63,6 +62,7 @@ public class RegistrarHorario extends javax.swing.JFrame {
         CB_Status.setEnabled(true);
         jButton1.setEnabled(true);
         jButton2.setEnabled(false);
+        txt_desHor.setEditable(true);
 
     }
     void limpiar(){
@@ -443,20 +443,16 @@ public void keyTyped(KeyEvent e)
 {if (txt_desHor.getText().length()== limite)
 {
     if (mensaje <= 1){
-       mensaje = 3;
+       mensaje = 2;
      e.consume();
      JOptionPane.showMessageDialog(null, "No se permiten mas de 100 caracteres");
-     
-    }
-    
-        
+    }       
 }
 else{
         mensaje=1;
     }
 
 }
- 
 public void keyPressed(KeyEvent arg0) {
 }
  
@@ -487,6 +483,7 @@ public void keyReleased(KeyEvent arg0) {
         Inicio ini = new Inicio();
         ini.setVisible(true);
         this.setVisible(false);
+        
     }//GEN-LAST:event_jButton5ActionPerformed
 
     /**

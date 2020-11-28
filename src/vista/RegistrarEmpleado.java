@@ -6,6 +6,8 @@
 package vista;
 
 import java.awt.Image;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,6 +26,7 @@ import modelo.Empleado;
  */
 public class RegistrarEmpleado extends javax.swing.JFrame {
     public static final int MYSQL_DUPLICATE_PK = 1062;
+    public int mensaje=1, limite=18;
     //Se establece la conexión con la base de datos
     controlador.Conexion con = new controlador.Conexion();
     Connection cn  = con.conexion();
@@ -312,6 +315,16 @@ public class RegistrarEmpleado extends javax.swing.JFrame {
         txt_curp.setAlignmentX(0.0F);
         txt_curp.setAlignmentY(0.0F);
         txt_curp.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        txt_curp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_curpActionPerformed(evt);
+            }
+        });
+        txt_curp.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_curpKeyPressed(evt);
+            }
+        });
         getContentPane().add(txt_curp);
         txt_curp.setBounds(170, 210, 153, 30);
 
@@ -486,6 +499,36 @@ public class RegistrarEmpleado extends javax.swing.JFrame {
         ini.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void txt_curpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_curpActionPerformed
+ 
+    }//GEN-LAST:event_txt_curpActionPerformed
+
+    private void txt_curpKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_curpKeyPressed
+             txt_curp.addKeyListener(new KeyListener(){
+ 
+public void keyTyped(KeyEvent e)
+ 
+{if (txt_curp.getText().length()== limite)
+{
+    if (mensaje <= 1){
+       mensaje = 2;
+     e.consume();
+     JOptionPane.showMessageDialog(null, "No se permiten mas de 18 caracteres");
+    }       
+}
+else{
+        mensaje=1;
+    }
+
+}
+public void keyPressed(KeyEvent arg0) {
+}
+ 
+public void keyReleased(KeyEvent arg0) {
+}
+});
+    }//GEN-LAST:event_txt_curpKeyPressed
 
     /**
      * @param args the command line arguments

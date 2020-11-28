@@ -34,4 +34,14 @@ public class Consultas {
         return sql;    }
     
     
+    
+    public String consultaHorario(int idhorario){
+            String sql = "Select * from chorars where nidhora ="+idhorario ;
+              
+    return sql;
+    }
+    
+
+
+
 }

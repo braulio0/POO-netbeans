@@ -64,7 +64,7 @@ public class ModificarHorEmp extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jComboBox1);
-        jComboBox1.setBounds(500, 320, 56, 20);
+        jComboBox1.setBounds(500, 320, 58, 23);
 
         jButton1.setText("Id Horario Actual");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -73,27 +73,27 @@ public class ModificarHorEmp extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(70, 110, 113, 23);
+        jButton1.setBounds(70, 110, 115, 24);
         getContentPane().add(jButton2);
         jButton2.setBounds(200, 110, 90, 20);
 
         jButton3.setText("Id Horario Nuevo");
         getContentPane().add(jButton3);
-        jButton3.setBounds(420, 110, 115, 23);
+        jButton3.setBounds(420, 110, 117, 24);
         getContentPane().add(jButton4);
         jButton4.setBounds(570, 110, 90, 20);
 
         jButton5.setText("Descripcion del Horario Actual ");
         getContentPane().add(jButton5);
-        jButton5.setBounds(60, 180, 190, 23);
+        jButton5.setBounds(80, 180, 190, 24);
 
         jButton6.setText("Descripcion del Horario Nuevo");
         getContentPane().add(jButton6);
-        jButton6.setBounds(420, 180, 190, 23);
+        jButton6.setBounds(420, 180, 190, 24);
 
         jButton7.setText("Status");
         getContentPane().add(jButton7);
-        jButton7.setBounds(410, 320, 63, 23);
+        jButton7.setBounds(410, 320, 65, 24);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
