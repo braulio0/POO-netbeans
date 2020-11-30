@@ -43,5 +43,9 @@ public class Inserciones {
                 + "VALUES(?,?,?,?)";
         return sql;
     }
-    
+    public String insertAsignarHorarios(){
+         String sql = "INSERT INTO DHREMPS (NIDHORA,CCVEEMP,CSTATUS) " 
+                 + "VALUES(?,?,?)";
+         return sql;
+     }
 }

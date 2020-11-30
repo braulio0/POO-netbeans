@@ -128,12 +128,14 @@ controlador.Conexion con = new controlador.Conexion();
 
         txt_hdesc.setColumns(20);
         txt_hdesc.setRows(5);
+        txt_hdesc.setEnabled(false);
         jScrollPane1.setViewportView(txt_hdesc);
 
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(110, 160, 260, 60);
 
         CB_Status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        CB_Status.setEnabled(false);
         CB_Status.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CB_StatusActionPerformed(evt);

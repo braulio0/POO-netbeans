@@ -7,6 +7,7 @@ package vista;
 
 import java.awt.Image;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -17,6 +18,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import modelo.Empleado;
 import modelo.Horario;
+import vista.ConsultaEmpleados;
+import vista.Inicio;
+import vista.RegistrarEmpleado;
+import static vista.RegistrarEmpleado.MYSQL_DUPLICATE_PK;
 
 /**
  *
@@ -30,6 +35,8 @@ public class AsignarHorario extends javax.swing.JFrame {
      */
     public AsignarHorario() {
         initComponents();
+        setLocationRelativeTo(null);
+        setTitle("Asignar horario");
         ImageIcon imagen = new ImageIcon("src/imagen/fondo.jpg");
         Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_DEFAULT));
         jLabel1.setIcon(icono);
@@ -58,12 +65,15 @@ void llenardatos(){
             datosEmpleado.setCAPEUNO(rs.getString("capeuno"));
             datosEmpleado.setCAPEDOS(rs.getString("capedos"));
             datosEmpleado.setNIDESTA(Integer.parseInt(rs.getString("nidesta")));
-            txt_nombre.setText(datosEmpleado.getCNOMBRE());
-            txt_apeuno.setText(datosEmpleado.getCAPEUNO()+" "+datosEmpleado.getCAPEDOS());
+            txt_nombre.setText(datosEmpleado.getCNOMBRE()+" "+ datosEmpleado.getCAPEUNO()+" "+datosEmpleado.getCAPEDOS());
+            //txt_apeuno.setText(datosEmpleado.getCAPEUNO()+" "+datosEmpleado.getCAPEDOS());
                                    
              }
              } catch (SQLException ex) {
             Logger.getLogger(ConsultaEmpleados.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if(txt_nombre.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Empleado no existente");
         }
        
         
@@ -83,9 +93,6 @@ void LlenarHorario(){
             datosHorario.setCSTATUS(rs.getString("CSTATUS"));
             txt_hdesc.setText(datosHorario.getCDESCHR());
             JOptionPane.showMessageDialog(this, datosHorario.getCSTATUS().length() );
-            if (datosHorario.getCSTATUS() != "I"){
-                CB_Status.setSelectedIndex(0);
-             }
             if (datosHorario.getCSTATUS().compareTo("A")==0){
                      CB_Status.setSelectedIndex(0);
                      }
@@ -96,6 +103,9 @@ void LlenarHorario(){
               } catch (SQLException ex) {
             Logger.getLogger(ConsultaEmpleados.class.getName()).log(Level.SEVERE, null, ex);
         }
+        //if(txt_hdesc.getText().equals("")){
+           // JOptionPane.showMessageDialog(null, "Horario no existente");
+       // }
     
 }
     /**
@@ -115,22 +125,19 @@ void LlenarHorario(){
         jButton1 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         CB_Status = new javax.swing.JComboBox<>();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnInicio = new javax.swing.JButton();
+        btnLimpiar = new javax.swing.JButton();
+        btnGuardar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        txt_apeuno = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         txt_hdesc = new javax.swing.JTextArea();
-        jLabel5 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(850, 500));
         setMinimumSize(new java.awt.Dimension(815, 500));
-        setPreferredSize(new java.awt.Dimension(815, 500));
         getContentPane().setLayout(null);
 
         txt_cveemp.addActionListener(new java.awt.event.ActionListener() {
@@ -139,19 +146,23 @@ void LlenarHorario(){
             }
         });
         getContentPane().add(txt_cveemp);
-        txt_cveemp.setBounds(150, 28, 130, 30);
+        txt_cveemp.setBounds(180, 70, 130, 30);
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Clave");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(60, 40, 28, 20);
+        jLabel2.setBounds(20, 80, 90, 20);
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Nombre");
+        jLabel3.setText("Nombre empleado");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(60, 90, 60, 20);
+        jLabel3.setBounds(20, 130, 140, 20);
+
+        txt_nombre.setEnabled(false);
         getContentPane().add(txt_nombre);
-        txt_nombre.setBounds(150, 80, 130, 30);
+        txt_nombre.setBounds(180, 120, 440, 30);
 
         txt_idhorario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -159,8 +170,9 @@ void LlenarHorario(){
             }
         });
         getContentPane().add(txt_idhorario);
-        txt_idhorario.setBounds(40, 160, 100, 30);
+        txt_idhorario.setBounds(180, 190, 100, 30);
 
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         jButton1.setText("Buscar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -168,69 +180,71 @@ void LlenarHorario(){
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(150, 160, 69, 24);
+        jButton1.setBounds(80, 230, 120, 30);
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Status");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(40, 300, 50, 20);
+        jLabel4.setBounds(20, 300, 50, 20);
 
+        CB_Status.setEditable(true);
+        CB_Status.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         CB_Status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        CB_Status.setEnabled(false);
         CB_Status.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CB_StatusActionPerformed(evt);
             }
         });
         getContentPane().add(CB_Status);
-        CB_Status.setBounds(110, 300, 58, 23);
+        CB_Status.setBounds(180, 290, 80, 30);
 
-        jButton2.setText("Inicio");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnInicio.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        btnInicio.setText("Inicio");
+        btnInicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnInicioActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2);
-        jButton2.setBounds(50, 400, 80, 24);
+        getContentPane().add(btnInicio);
+        btnInicio.setBounds(180, 380, 100, 30);
 
-        jButton3.setText("Limpiar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnLimpiar.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        btnLimpiar.setText("Limpiar");
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnLimpiarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3);
-        jButton3.setBounds(180, 400, 90, 24);
+        getContentPane().add(btnLimpiar);
+        btnLimpiar.setBounds(310, 380, 110, 30);
 
-        jButton4.setText("Guardar");
-        getContentPane().add(jButton4);
-        jButton4.setBounds(330, 400, 90, 24);
+        btnGuardar.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnGuardar);
+        btnGuardar.setBounds(460, 380, 110, 30);
 
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Descripcion de Horario");
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(400, 140, 130, 30);
-
-        txt_apeuno.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_apeunoActionPerformed(evt);
-            }
-        });
-        getContentPane().add(txt_apeuno);
-        txt_apeuno.setBounds(540, 30, 170, 30);
+        jLabel6.setBounds(400, 170, 240, 40);
 
         txt_hdesc.setColumns(20);
         txt_hdesc.setRows(5);
+        txt_hdesc.setEnabled(false);
         jScrollPane1.setViewportView(txt_hdesc);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(530, 130, 240, 90);
+        jScrollPane1.setBounds(400, 210, 390, 110);
 
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Apellido");
-        getContentPane().add(jLabel5);
-        jLabel5.setBounds(460, 40, 60, 20);
-
+        jButton5.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         jButton5.setText("Consultar");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -238,12 +252,18 @@ void LlenarHorario(){
             }
         });
         getContentPane().add(jButton5);
-        jButton5.setBounds(300, 30, 100, 24);
+        jButton5.setBounds(340, 70, 120, 30);
 
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Id Horario");
         getContentPane().add(jLabel7);
-        jLabel7.setBounds(50, 140, 60, 14);
+        jLabel7.setBounds(20, 190, 90, 20);
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel5.setText("Asignar horario");
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(310, 20, 150, 23);
 
         jLabel1.setText("jLabel1");
         getContentPane().add(jLabel1);
@@ -260,29 +280,64 @@ void LlenarHorario(){
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_idhorarioActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void btnInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInicioActionPerformed
+        Inicio ini = new Inicio();
+        ini.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnInicioActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void txt_apeunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_apeunoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_apeunoActionPerformed
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        txt_cveemp.setText("");
+        txt_nombre.setText("");
+        txt_idhorario.setText("");
+       // txt_apeuno.setText("");
+        txt_hdesc.setText("");
+    }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        txt_nombre.setText("");
+        //txt_apeuno.setText("");
         llenardatos();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        txt_hdesc.setText("");
         LlenarHorario();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void CB_StatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CB_StatusActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_CB_StatusActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+       if(txt_nombre.getText().equals("")){
+           JOptionPane.showMessageDialog(null, "Por favor ingresa la clave de un usuario existente");
+       }else if(txt_hdesc.getText().equals("")){
+           JOptionPane.showMessageDialog(null, "Por favor ingrese la clave de un horario existente");
+       }else{
+            Empleado datoEmp = new Empleado();
+            controlador.Inserciones asigHor;
+            asigHor = new controlador.Inserciones();
+            Horario datoHorario = new Horario();
+            datoEmp.setCCVEEMP(txt_cveemp.getText());
+            datoHorario.setNIDHORA(Integer.parseInt(txt_idhorario.getText()));
+            datoHorario.setCSTATUS(CB_Status.getItemAt(CB_Status.getSelectedIndex()));
+            //JOptionPane.showMessageDialog(null, "e"+ datoEmp.getCCVEEMP()+" "+datoHorario.getNIDHORA()+" "+datoHorario.getCSTATUS());
+            try{
+                PreparedStatement pps = cn.prepareStatement(asigHor.insertAsignarHorarios());
+                pps.setInt(1, datoHorario.getNIDHORA());
+                pps.setString(2,datoEmp.getCCVEEMP());
+                pps.setString(3, datoHorario.getCSTATUS());
+                pps.executeUpdate();
+                JOptionPane.showMessageDialog(this, "Horario asignado con exito");
+            }catch (SQLException ex) {
+            if(ex.getErrorCode() == MYSQL_DUPLICATE_PK ){
+                JOptionPane.showMessageDialog(this, "El empleado ya tiene asignado ese horario");
+            }
+            Logger.getLogger(RegistrarEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       }
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -321,10 +376,10 @@ void LlenarHorario(){
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> CB_Status;
+    private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnInicio;
+    private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -334,7 +389,6 @@ void LlenarHorario(){
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField txt_apeuno;
     private javax.swing.JTextField txt_cveemp;
     private javax.swing.JTextArea txt_hdesc;
     private javax.swing.JTextField txt_idhorario;

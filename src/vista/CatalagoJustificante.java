@@ -17,7 +17,9 @@ public class CatalagoJustificante extends javax.swing.JFrame {
     public CatalagoJustificante() {
         initComponents();
     }
-
+void llenaJustificantes(){
+    
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -36,6 +38,8 @@ public class CatalagoJustificante extends javax.swing.JFrame {
         jTextField2 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -48,16 +52,16 @@ public class CatalagoJustificante extends javax.swing.JFrame {
         getContentPane().add(jTextField1);
         jTextField1.setBounds(150, 20, 120, 18);
 
-        jLabel2.setText("Tipo de Justificación");
+        jLabel2.setText("Descripcion de Justificación");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(20, 180, 110, 14);
+        jLabel2.setBounds(10, 200, 200, 14);
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(150, 150, 183, 73);
+        jScrollPane1.setBounds(150, 210, 183, 73);
 
         jLabel3.setText("Fecha ");
         getContentPane().add(jLabel3);
@@ -74,11 +78,24 @@ public class CatalagoJustificante extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(160, 270, 80, 24);
+        jButton1.setBounds(160, 310, 80, 24);
 
         jButton2.setText("Inicio ");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton2);
-        jButton2.setBounds(540, 350, 73, 24);
+        jButton2.setBounds(410, 310, 73, 24);
+
+        jLabel4.setText("Tipo de Justificación");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(10, 130, 110, 14);
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(jComboBox1);
+        jComboBox1.setBounds(150, 130, 150, 23);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -86,6 +103,10 @@ public class CatalagoJustificante extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -125,9 +146,11 @@ public class CatalagoJustificante extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
