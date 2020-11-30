@@ -5,18 +5,80 @@
  */
 package vista;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import modelo.Horario;
+
 /**
  *
  * @author emmaf
  */
 public class DiaNoHabil extends javax.swing.JFrame {
-
+controlador.Conexion con = new controlador.Conexion();
+        Connection cn  = con.conexion();
     /**
      * Creates new form DiaNoHabil
      */
     public DiaNoHabil() {
         initComponents();
+        llena_fechas();
+        llena_datos();
+        CB_Status.removeAllItems();
     }
+    void llena_fechas(){
+        controlador.Consultas consfecha;
+        consfecha = new controlador.Consultas();
+        CB_fecha.removeAllItems();
+        Statement st;
+        try {
+            st = cn.createStatement();
+            ResultSet rs = st.executeQuery(consfecha.consultaDiaNhabil());
+            while (rs.next()){
+                CB_fecha.addItem(rs.getString(1));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(RegistrarEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    void llena_datos(){
+        controlador.Consultas consfecha;
+        consfecha = new controlador.Consultas();
+        CB_Status.removeAllItems();
+        Statement st;
+        try {
+            st = cn.createStatement();
+            ResultSet rs = st.executeQuery(consfecha.consutaStatusHN(CB_fecha.getItemAt(CB_fecha.getSelectedIndex())));
+            while (rs.next()){
+                CB_Status.addItem(rs.getString(1));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(RegistrarEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Llenarmotivo(CB_fecha.getItemAt(CB_fecha.getSelectedIndex()));
+    }
+    void Llenarmotivo(String fecha){
+    Horario datosHorario;
+    datosHorario = new Horario();
+    controlador.Consultas consHor;
+    consHor = new controlador.Consultas();
+    Statement st;
+    try{
+        st = cn.createStatement();
+        ResultSet rs = st.executeQuery(consHor.consultaDescripcion(fecha));
+            //JOptionPane.showMessageDialog(this, "tercero");
+             while(rs.next()){
+            txt_hdesc.setText(rs.getString(1));
+                  }
+              } catch (SQLException ex) {
+            Logger.getLogger(ConsultaEmpleados.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -31,73 +93,70 @@ public class DiaNoHabil extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        Status = new javax.swing.JComboBox<>();
+        txt_hdesc = new javax.swing.JTextArea();
+        CB_Status = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        CB_fecha = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
         jLabel1.setText("Fecha ");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(45, 40, 32, 14);
+        jLabel1.setBounds(50, 90, 34, 14);
 
         jLabel2.setText("Motivo ");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(40, 110, 50, 14);
+        jLabel2.setBounds(40, 160, 50, 14);
 
         jLabel3.setText("Status ");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(430, 110, 34, 14);
+        jLabel3.setBounds(430, 160, 34, 14);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        txt_hdesc.setColumns(20);
+        txt_hdesc.setRows(5);
+        jScrollPane1.setViewportView(txt_hdesc);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(90, 110, 260, 60);
+        jScrollPane1.setBounds(90, 160, 260, 60);
 
-        Status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(Status);
-        Status.setBounds(490, 110, 56, 20);
+        CB_Status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        CB_Status.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CB_StatusActionPerformed(evt);
+            }
+        });
+        getContentPane().add(CB_Status);
+        CB_Status.setBounds(490, 160, 58, 23);
 
         jButton1.setText("Guardar");
         getContentPane().add(jButton1);
-        jButton1.setBounds(490, 160, 71, 23);
+        jButton1.setBounds(490, 210, 75, 24);
 
         jButton2.setText("Inicio ");
         getContentPane().add(jButton2);
-        jButton2.setBounds(500, 370, 73, 23);
-        getContentPane().add(jTextField2);
-        jTextField2.setBounds(110, 40, 100, 20);
+        jButton2.setBounds(500, 370, 73, 24);
 
-        jLabel4.setText("Dias no laborables guardados");
-        getContentPane().add(jLabel4);
-        jLabel4.setBounds(90, 210, 170, 14);
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Fecha ", "Motivo ", "Status"
+        CB_fecha.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        CB_fecha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CB_fechaActionPerformed(evt);
             }
-        ));
-        jScrollPane3.setViewportView(jTable1);
-
-        getContentPane().add(jScrollPane3);
-        jScrollPane3.setBounds(40, 230, 452, 90);
+        });
+        getContentPane().add(CB_fecha);
+        CB_fecha.setBounds(120, 90, 100, 23);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void CB_StatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CB_StatusActionPerformed
+        
+    }//GEN-LAST:event_CB_StatusActionPerformed
+
+    private void CB_fechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CB_fechaActionPerformed
+        llena_datos();
+    }//GEN-LAST:event_CB_fechaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -135,17 +194,14 @@ public class DiaNoHabil extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> Status;
+    private javax.swing.JComboBox<String> CB_Status;
+    private javax.swing.JComboBox<String> CB_fecha;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextArea txt_hdesc;
     // End of variables declaration//GEN-END:variables
 }

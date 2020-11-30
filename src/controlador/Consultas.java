@@ -41,6 +41,24 @@ public class Consultas {
     return sql;
     }
     
+    public String consultaDiaNhabil(){
+        String sql = "select concat(dfechnl) from mdiasnl ;";
+        return sql;
+    }
+    
+    public String consutaStatusHN( String fecha){
+        String sql = "select cstatus from mdiasnl where dfechnl = '"+fecha+"'";
+       
+        return sql;
+        
+    }
+    
+    public String consultaDescripcion(String fecha)
+    {
+        String sql = " select cmotivo  from mdiasnl where dfechnl = '"+fecha+"'";
+        return sql;
+    }
+    
 
 
 

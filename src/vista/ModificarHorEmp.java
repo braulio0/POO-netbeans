@@ -11,11 +11,15 @@ package vista;
  */
 public class ModificarHorEmp extends javax.swing.JFrame {
 
-    /**
+    /**  
      * Creates new form ModificarHorEmp
      */
     public ModificarHorEmp() {
         initComponents();
+    }
+    void limpiar()
+    {
+        
     }
 
     /**
