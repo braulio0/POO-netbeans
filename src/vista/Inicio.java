@@ -47,7 +47,7 @@ public class Inicio extends javax.swing.JFrame {
         ImageIcon imagen3 = new ImageIcon( "src/imagen/HorarioNuevo.png");
         Icon icono3 = new ImageIcon(imagen3.getImage().getScaledInstance(jLabel3.getWidth(),jLabel3.getHeight(),Image.SCALE_DEFAULT));
         jLabel3.setIcon(icono3);
-        ImageIcon imagen4 = new ImageIcon( "src/imagen/Descansos.jpeg");
+        ImageIcon imagen4 = new ImageIcon( "src/imagen/Descansos.png");
         Icon icono4 = new ImageIcon(imagen4.getImage().getScaledInstance(jLabel4.getWidth(),jLabel4.getHeight(),Image.SCALE_DEFAULT));
         jLabel4.setIcon(icono4);
         ImageIcon imagen5 = new ImageIcon( "src/imagen/AsignarHorario.png");
@@ -174,9 +174,15 @@ private String abrirArchivo(){
         getContentPane().add(jButton1);
         jButton1.setBounds(350, 250, 140, 24);
 
-        jButton2.setText("jButton1");
+        jButton2.setText("Dias No habiles");
+        jButton2.setPreferredSize(new java.awt.Dimension(118, 24));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton2);
-        jButton2.setBounds(640, 250, 73, 24);
+        jButton2.setBounds(620, 250, 120, 24);
 
         jButton3.setText("Registrar Empleado");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -281,6 +287,13 @@ private String abrirArchivo(){
         this.setVisible(false);
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+       
+      DiaNoHabil dnh = new DiaNoHabil();
+      dnh.setVisible(true);
+      this.setVisible(false);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
