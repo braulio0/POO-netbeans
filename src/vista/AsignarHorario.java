@@ -38,8 +38,8 @@ public class AsignarHorario extends javax.swing.JFrame {
     }
     void llenaStatus(){
      CB_Status.removeAllItems();
+     CB_Status.addItem("E");
      CB_Status.addItem("A");
-     CB_Status.addItem("I");
 }
 void llenardatos(){
     txt_cveemp.setEnabled(true);
