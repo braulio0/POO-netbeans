@@ -42,11 +42,11 @@ public class CatalagoJustificante extends javax.swing.JFrame {
 
         jLabel1.setText("Folio (No. de trabajador) ");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(20, 20, 122, 14);
+        jLabel1.setBounds(20, 20, 121, 14);
 
         jTextField1.setText("jTextField1");
         getContentPane().add(jTextField1);
-        jTextField1.setBounds(150, 20, 120, 20);
+        jTextField1.setBounds(150, 20, 120, 18);
 
         jLabel2.setText("Tipo de Justificación");
         getContentPane().add(jLabel2);
@@ -57,15 +57,15 @@ public class CatalagoJustificante extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTextArea1);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(150, 140, 166, 96);
+        jScrollPane1.setBounds(150, 150, 183, 73);
 
         jLabel3.setText("Fecha ");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(20, 70, 32, 14);
+        jLabel3.setBounds(20, 70, 34, 14);
 
         jTextField2.setText("jTextField2");
         getContentPane().add(jTextField2);
-        jTextField2.setBounds(150, 70, 120, 20);
+        jTextField2.setBounds(150, 70, 120, 18);
 
         jButton1.setText("Guardar ");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -74,11 +74,11 @@ public class CatalagoJustificante extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(160, 270, 80, 23);
+        jButton1.setBounds(160, 270, 80, 24);
 
         jButton2.setText("Inicio ");
         getContentPane().add(jButton2);
-        jButton2.setBounds(540, 350, 73, 23);
+        jButton2.setBounds(540, 350, 73, 24);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
