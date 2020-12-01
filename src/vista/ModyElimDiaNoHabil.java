@@ -5,18 +5,124 @@
  */
 package vista;
 
+import java.awt.Image;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import modelo.Horario;
+
 /**
  *
  * @author emmaf
  */
 public class ModyElimDiaNoHabil extends javax.swing.JFrame {
-
+controlador.Conexion con = new controlador.Conexion();
+        Connection cn  = con.conexion();
     /**
      * Creates new form ModyElimDiaNoHabil
      */
     public ModyElimDiaNoHabil() {
         initComponents();
+        CB_fechas.removeAllItems();
+        llena_fechas();
+        llenaStatus();
+        inhabil();
+        ImageIcon imagen = new ImageIcon( "src/imagen/fondo.jpg");
+        Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(jLabel2.getWidth(),jLabel2.getHeight(),Image.SCALE_DEFAULT));
+        jLabel2.setIcon(icono);
     }
+    void habil(){
+        txt_hdesc.setEditable(true);
+        CB_status.setEnabled(true);
+    }
+    void inhabil(){
+        txt_hdesc.setEditable(false);
+        CB_status.setEnabled(false);
+        jButton1.setEnabled(false);
+        
+    }
+    void llena_fechas(){
+        controlador.Consultas consfecha;
+        consfecha = new controlador.Consultas();
+        CB_fechas.removeAllItems();
+        Statement st;
+        try {
+            st = cn.createStatement();
+            ResultSet rs = st.executeQuery(consfecha.consultaDiaNhabil());
+            while (rs.next()){
+                CB_fechas.addItem(rs.getString(1));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(RegistrarEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+  
+    void LlenarDia(){
+    Horario datosHorario;
+    datosHorario = new Horario();
+    controlador.Consultas consHor;
+    consHor = new controlador.Consultas();
+    Statement st;
+    try{
+        st = cn.createStatement();
+        ResultSet rs = st.executeQuery(consHor.consutaStatusNH(CB_fechas.getItemAt(CB_fechas.getSelectedIndex())));
+            //JOptionPane.showMessageDialog(this, "tercero");
+             while(rs.next()){
+            datosHorario.setCMOTIVO(rs.getString("CMOTIVO"));
+            datosHorario.setCSTATUS(rs.getString("CSTATUS"));
+            txt_hdesc.setText(datosHorario.getCMOTIVO());
+            if (datosHorario.getCSTATUS().compareTo("A")==0){
+                     CB_status.setSelectedIndex(0);
+                     datosHorario.setCSTATUS("A");
+                     }
+            if (datosHorario.getCSTATUS().compareTo("I")==0){
+                     CB_status.setSelectedIndex(1);
+                     datosHorario.setCSTATUS("I");
+                     }
+             }
+              } catch (SQLException ex) {
+            Logger.getLogger(ConsultaEmpleados.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        //if(txt_hdesc.getText().equals("")){
+           // JOptionPane.showMessageDialog(null, "Horario no existente");
+       // }
+    
+}
+   void llenaStatus(){
+     CB_status.removeAllItems();
+     CB_status.addItem("A");
+     CB_status.addItem("I");
+}
+   
+   void Actualizar(){
+    Horario datosHorario;
+    datosHorario = new Horario();
+    controlador.Inserciones consHor;
+    consHor = new controlador.Inserciones();
+    datosHorario.setDFECHNL(CB_fechas.getItemAt(CB_fechas.getSelectedIndex()));
+        JOptionPane.showMessageDialog(null, datosHorario.getDFECHNL());
+
+    datosHorario.setCSTATUS(CB_status.getItemAt(CB_status.getSelectedIndex()));
+        JOptionPane.showMessageDialog(null, datosHorario.getCSTATUS());
+
+    datosHorario.setCMOTIVO(txt_hdesc.getText());
+    try {
+            PreparedStatement pps = cn.prepareStatement(consHor.ModificarDiaNH());
+            pps.setString(1, datosHorario.getCMOTIVO());
+            pps.setString(2, datosHorario.getCSTATUS());
+            pps.setString(3, datosHorario.getDFECHNL() );
+            pps.executeUpdate();
+    }catch(SQLException ex) {
+            Logger.getLogger(ConsultaEmpleados.class.getName()).log(Level.SEVERE, null, ex);
+        }
+   }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -28,85 +134,115 @@ public class ModyElimDiaNoHabil extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jTextField1 = new javax.swing.JTextField();
+        CB_fechas = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txt_hdesc = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        CB_status = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(700, 515));
+        setMinimumSize(new java.awt.Dimension(700, 515));
+        setPreferredSize(new java.awt.Dimension(700, 515));
         getContentPane().setLayout(null);
 
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Fecha ID");
         getContentPane().add(jLabel1);
         jLabel1.setBounds(40, 30, 100, 14);
 
-        jLabel2.setText("Fecha ");
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(40, 120, 110, 14);
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        CB_fechas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        CB_fechas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                CB_fechasActionPerformed(evt);
             }
         });
-        getContentPane().add(jComboBox1);
-        jComboBox1.setBounds(190, 30, 120, 20);
+        getContentPane().add(CB_fechas);
+        CB_fechas.setBounds(190, 30, 120, 23);
 
-        jTextField1.setText("jTextField1");
-        getContentPane().add(jTextField1);
-        jTextField1.setBounds(190, 80, 130, 80);
-
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Descripcion ");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(30, 260, 57, 14);
+        jLabel3.setBounds(30, 120, 61, 14);
+        getContentPane().add(txt_hdesc);
+        txt_hdesc.setBounds(160, 110, 280, 100);
 
-        jTextField2.setText("jTextField2");
-        getContentPane().add(jTextField2);
-        jTextField2.setBounds(180, 210, 140, 100);
-
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Status");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(40, 370, 31, 14);
+        jLabel4.setBounds(50, 250, 31, 14);
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(jComboBox3);
-        jComboBox3.setBounds(180, 370, 56, 20);
+        CB_status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(CB_status);
+        CB_status.setBounds(170, 250, 58, 23);
 
         jButton1.setText("Guardar ");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton1);
-        jButton1.setBounds(209, 440, 80, 23);
+        jButton1.setBounds(130, 440, 80, 24);
 
         jButton2.setText("Consultar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton2);
-        jButton2.setBounds(303, 440, 80, 23);
+        jButton2.setBounds(240, 440, 110, 24);
 
         jButton3.setText("Modificar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton3);
-        jButton3.setBounds(395, 440, 80, 23);
+        jButton3.setBounds(375, 440, 100, 24);
 
         jButton4.setText("Eliminar ");
         getContentPane().add(jButton4);
-        jButton4.setBounds(490, 440, 71, 23);
+        jButton4.setBounds(490, 440, 75, 24);
 
         jButton5.setText("Inicio");
         getContentPane().add(jButton5);
-        jButton5.setBounds(570, 440, 57, 23);
+        jButton5.setBounds(30, 440, 70, 24);
+
+        jLabel2.setText("jLabel2");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(0, -6, 730, 500);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    private void CB_fechasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CB_fechasActionPerformed
+        LlenarDia();
+    }//GEN-LAST:event_CB_fechasActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        DiaNoHabil dnh = new DiaNoHabil();
+        dnh.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       Actualizar();
+        inhabil();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        jButton1.setEnabled(true);
+                habil();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -144,18 +280,17 @@ public class ModyElimDiaNoHabil extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> CB_fechas;
+    private javax.swing.JComboBox<String> CB_status;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField txt_hdesc;
     // End of variables declaration//GEN-END:variables
 }

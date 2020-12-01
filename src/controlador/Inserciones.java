@@ -48,4 +48,11 @@ public class Inserciones {
                  + "VALUES(?,?,?)";
          return sql;
      }
+    
+    public String ModificarDiaNH( ){
+        String sql;
+        sql = "UPDATE MDIASNL SET CMOTIVO=?,CSTATUS=?"
+              + "WHERE DFECHNL=?";
+        return sql;
+    }
 }

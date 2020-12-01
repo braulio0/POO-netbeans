@@ -45,7 +45,12 @@ public class Consultas {
         String sql = "select concat(dfechnl) from mdiasnl ;";
         return sql;
     }
-    
+    public String consutaStatusNH( String fecha){
+        String sql = "select * from mdiasnl where dfechnl = '"+fecha+"'";
+       
+        return sql;
+        
+    }
     public String consutaStatusHN( String fecha){
         String sql = "select cstatus from mdiasnl where dfechnl = '"+fecha+"'";
        
@@ -66,6 +71,7 @@ public class Consultas {
                 + "ORDER BY NIDTPJU ASC";
         return sql;
     }
+    
     public String consultaCatalogoJudtificantesInactivos() {
         String sql = "SELECT CONCAT(NIDTPJU, ' ', CDESJUS, ' | ', 'Inactivo') "
                 + "FROM CJUSASI "

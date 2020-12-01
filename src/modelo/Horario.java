@@ -16,6 +16,8 @@ public class Horario {
     private int     NDIASEM; 
     private String  CHORENT;
     private String  CHORSAL;
+    private String  CMOTIVO;
+    private String  DFECHNL;
     /**
      * @return the NIDHORA
      */
@@ -29,6 +31,25 @@ public class Horario {
     public void setNIDHORA(int NIDHORA) {
         this.NIDHORA = NIDHORA;
     }
+    public String getCMOTIVO() {
+        return CMOTIVO;
+    }
+
+    /**
+     * @param CMOTIVO the CMOTIVO to set
+     */
+    public void setCMOTIVO(String CMOTIVO) {
+        this.CMOTIVO = CMOTIVO;
+    }
+    public void setDFECHNL(String DFECHNL) {
+        this.DFECHNL = DFECHNL;
+    }
+    /**
+     * @return the CDESCHR
+     */
+    public String getDFECHNL() {
+        return DFECHNL;
+    }
 
     /**
      * @return the CDESCHR
@@ -36,6 +57,7 @@ public class Horario {
     public String getCDESCHR() {
         return CDESCHR;
     }
+    
 
     /**
      * @param CDESCHR the CDESCHR to set
