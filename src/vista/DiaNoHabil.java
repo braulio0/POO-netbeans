@@ -144,7 +144,7 @@ controlador.Conexion con = new controlador.Conexion();
             }
         });
         getContentPane().add(CB_Status);
-        CB_Status.setBounds(490, 150, 58, 23);
+        CB_Status.setBounds(490, 150, 56, 20);
 
         jButton2.setText("Inicio ");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -153,7 +153,7 @@ controlador.Conexion con = new controlador.Conexion();
             }
         });
         getContentPane().add(jButton2);
-        jButton2.setBounds(40, 330, 73, 24);
+        jButton2.setBounds(40, 330, 73, 23);
 
         CB_fecha.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         CB_fecha.addActionListener(new java.awt.event.ActionListener() {
@@ -162,7 +162,7 @@ controlador.Conexion con = new controlador.Conexion();
             }
         });
         getContentPane().add(CB_fecha);
-        CB_fecha.setBounds(120, 90, 100, 23);
+        CB_fecha.setBounds(120, 90, 100, 20);
 
         jButton3.setText("Registrar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -171,7 +171,7 @@ controlador.Conexion con = new controlador.Conexion();
             }
         });
         getContentPane().add(jButton3);
-        jButton3.setBounds(170, 330, 120, 24);
+        jButton3.setBounds(170, 330, 120, 23);
 
         jButton4.setText("Modificar");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -180,7 +180,7 @@ controlador.Conexion con = new controlador.Conexion();
             }
         });
         getContentPane().add(jButton4);
-        jButton4.setBounds(350, 330, 120, 24);
+        jButton4.setBounds(350, 330, 120, 23);
 
         jLabel4.setText("jLabel4");
         jLabel4.setMaximumSize(new java.awt.Dimension(815, 500));
