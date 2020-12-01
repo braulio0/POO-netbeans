@@ -60,17 +60,20 @@ public class Consultas {
     }
     
     public String consultaCatalogoJudtificantes() {
-        String sql = "SELECT CONCAT(NIDTPJU) "
+        String sql = "SELECT CONCAT(NIDTPJU, ' ', CDESJUS, ' | ', 'Activo') "
                 + "FROM CJUSASI "
+                +"Where CSTATUS = 'A'"
+                + "ORDER BY NIDTPJU ASC";
+        return sql;
+    }
+    public String consultaCatalogoJudtificantesInactivos() {
+        String sql = "SELECT CONCAT(NIDTPJU, ' ', CDESJUS, ' | ', 'Inactivo') "
+                + "FROM CJUSASI "
+                +"Where CSTATUS = 'I'"
                 + "ORDER BY NIDTPJU ASC";
         return sql;
     }
     
-    public String consultaDescripcionJustifiante(int idjus)
-    {
-        String sql = " select CDESJUS  from CJUSASI where NIDTPJU = "+idjus;
-        return sql;
-    }
     
 
 

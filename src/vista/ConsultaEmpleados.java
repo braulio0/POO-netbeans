@@ -72,6 +72,7 @@ public class ConsultaEmpleados extends javax.swing.JFrame {
         CB_estados.setEnabled(false);
         CB_municipios.setEnabled(false);
         jButton1.setEnabled(false);
+        jButton6.setEnabled(false);
     }
     void llenaDatos(){
         txt_cveemp.setEnabled(true);
@@ -112,7 +113,7 @@ public class ConsultaEmpleados extends javax.swing.JFrame {
             CB_municipios.setSelectedIndex(datosEmpleado.getNIDMUNI()-1);
             
              }
-            
+            jButton6.setEnabled(true);
         } catch (SQLException ex) {
             Logger.getLogger(ConsultaEmpleados.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -189,6 +190,7 @@ public class ConsultaEmpleados extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         txt_fecing = new javax.swing.JTextField();
         jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -202,7 +204,7 @@ public class ConsultaEmpleados extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton2);
-        jButton2.setBounds(460, 390, 69, 24);
+        jButton2.setBounds(400, 390, 69, 24);
 
         jButton1.setText("Guardar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -211,7 +213,7 @@ public class ConsultaEmpleados extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(730, 390, 100, 24);
+        jButton1.setBounds(650, 390, 100, 24);
 
         jButton4.setText("Modificar");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -220,7 +222,7 @@ public class ConsultaEmpleados extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton4);
-        jButton4.setBounds(580, 390, 100, 24);
+        jButton4.setBounds(510, 390, 100, 24);
 
         txt_coloni.setToolTipText("");
         txt_coloni.setActionCommand("<Not Set>");
@@ -433,6 +435,15 @@ public class ConsultaEmpleados extends javax.swing.JFrame {
         getContentPane().add(jButton5);
         jButton5.setBounds(40, 390, 59, 24);
 
+        jButton6.setText("Eliminar");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton6);
+        jButton6.setBounds(780, 390, 100, 24);
+
         jLabel14.setText("fondo");
         getContentPane().add(jLabel14);
         jLabel14.setBounds(0, 0, 910, 430);
@@ -501,6 +512,7 @@ public class ConsultaEmpleados extends javax.swing.JFrame {
             Logger.getLogger(ConsultaEmpleados.class.getName()).log(Level.SEVERE, null, ex);
         }
         }
+       
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void CB_estadosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CB_estadosKeyPressed
@@ -569,6 +581,19 @@ public class ConsultaEmpleados extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+       controlador.Deletes deleEmps;
+       deleEmps = new controlador.Deletes();
+        try {
+            PreparedStatement pps = cn.prepareStatement(deleEmps.DeteleEmpleados());
+            pps.setString(1, txt_cveemp.getText());
+            pps.executeUpdate();
+            JOptionPane.showMessageDialog(this, "Empleado eliminado con exito");
+        } catch (SQLException ex) {
+        }
+       
+    }//GEN-LAST:event_jButton6ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -613,6 +638,7 @@ public class ConsultaEmpleados extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

@@ -103,6 +103,8 @@ controlador.Conexion con = new controlador.Conexion();
         CB_Status = new javax.swing.JComboBox<>();
         jButton2 = new javax.swing.JButton();
         CB_fecha = new javax.swing.JComboBox<>();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -151,7 +153,7 @@ controlador.Conexion con = new controlador.Conexion();
             }
         });
         getContentPane().add(jButton2);
-        jButton2.setBounds(290, 290, 73, 24);
+        jButton2.setBounds(40, 330, 73, 24);
 
         CB_fecha.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         CB_fecha.addActionListener(new java.awt.event.ActionListener() {
@@ -161,6 +163,24 @@ controlador.Conexion con = new controlador.Conexion();
         });
         getContentPane().add(CB_fecha);
         CB_fecha.setBounds(120, 90, 100, 23);
+
+        jButton3.setText("Registrar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton3);
+        jButton3.setBounds(170, 330, 120, 24);
+
+        jButton4.setText("Modificar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton4);
+        jButton4.setBounds(350, 330, 120, 24);
 
         jLabel4.setText("jLabel4");
         jLabel4.setMaximumSize(new java.awt.Dimension(815, 500));
@@ -185,6 +205,14 @@ controlador.Conexion con = new controlador.Conexion();
        in.setVisible(true);
        this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -225,6 +253,8 @@ controlador.Conexion con = new controlador.Conexion();
     private javax.swing.JComboBox<String> CB_Status;
     private javax.swing.JComboBox<String> CB_fecha;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

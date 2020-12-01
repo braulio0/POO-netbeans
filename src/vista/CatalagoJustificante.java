@@ -31,31 +31,24 @@ void llenaJustificantes(){
     controlador.Consultas consjust;
     consjust = new controlador.Consultas();
         CB_justificante.removeAllItems();
+        CB_justificante1.removeAllItems();
         Statement st;
         try {
             st = cn.createStatement();
             ResultSet rs = st.executeQuery(consjust.consultaCatalogoJudtificantes());
+            
             while (rs.next()){
                 CB_justificante.addItem(rs.getString(1));
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(RegistrarEmpleado.class.getName()).log(Level.SEVERE, null, ex);
-        }
-}
-void llena_Descripion(){
-    controlador.Consultas consjust;
-    consjust = new controlador.Consultas();
-        Statement st;
-        try {
-            st = cn.createStatement();
-            ResultSet rs = st.executeQuery(consjust.consultaDescripcionJustifiante(CB_justificante.getSelectedIndex()+1));
-            while (rs.next()){
-                txt_desc.setText(rs.getString(1));
+            ResultSet rs1 = st.executeQuery(consjust.consultaCatalogoJudtificantesInactivos());
+            while (rs1.next()){
+                CB_justificante1.addItem(rs1.getString(1));
             }
         } catch (SQLException ex) {
             Logger.getLogger(RegistrarEmpleado.class.getName()).log(Level.SEVERE, null, ex);
         }
 }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -65,17 +58,13 @@ void llena_Descripion(){
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txt_desc = new javax.swing.JTextArea();
-        jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         CB_justificante = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        CB_justificante1 = new javax.swing.JComboBox<>();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(new java.awt.Point(0, 0));
@@ -84,43 +73,6 @@ void llena_Descripion(){
         setPreferredSize(new java.awt.Dimension(580, 450));
         getContentPane().setLayout(null);
 
-        jLabel1.setText("Folio (No. de trabajador) ");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(20, 20, 121, 14);
-
-        jTextField1.setText("jTextField1");
-        getContentPane().add(jTextField1);
-        jTextField1.setBounds(150, 8, 120, 30);
-
-        jLabel2.setText("Descripcion de Justificación");
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(10, 200, 200, 14);
-
-        txt_desc.setColumns(20);
-        txt_desc.setRows(5);
-        txt_desc.setTabSize(2);
-        jScrollPane1.setViewportView(txt_desc);
-
-        getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(150, 210, 183, 100);
-
-        jLabel3.setText("Fecha ");
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(20, 70, 34, 14);
-
-        jTextField2.setText("jTextField2");
-        getContentPane().add(jTextField2);
-        jTextField2.setBounds(150, 58, 120, 30);
-
-        jButton1.setText("Guardar ");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton1);
-        jButton1.setBounds(160, 330, 80, 24);
-
         jButton2.setText("Inicio ");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -128,11 +80,11 @@ void llena_Descripion(){
             }
         });
         getContentPane().add(jButton2);
-        jButton2.setBounds(410, 310, 73, 24);
+        jButton2.setBounds(40, 290, 73, 24);
 
-        jLabel4.setText("Tipo de Justificación");
+        jLabel4.setText("Tipo de Justificación Activa");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(10, 130, 110, 14);
+        jLabel4.setBounds(10, 60, 180, 14);
 
         CB_justificante.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         CB_justificante.addActionListener(new java.awt.event.ActionListener() {
@@ -141,22 +93,61 @@ void llena_Descripion(){
             }
         });
         getContentPane().add(CB_justificante);
-        CB_justificante.setBounds(150, 130, 150, 23);
+        CB_justificante.setBounds(190, 60, 350, 23);
+
+        jLabel5.setText("Tipo de Justificación Inactiva");
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(10, 120, 180, 14);
+
+        CB_justificante1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        CB_justificante1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CB_justificante1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(CB_justificante1);
+        CB_justificante1.setBounds(190, 120, 350, 23);
+
+        jButton3.setText("Registrar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton3);
+        jButton3.setBounds(170, 290, 110, 24);
+
+        jButton4.setText("Modificar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton4);
+        jButton4.setBounds(330, 290, 120, 24);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void CB_justificanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CB_justificanteActionPerformed
-        llena_Descripion();
+ 
     }//GEN-LAST:event_CB_justificanteActionPerformed
+
+    private void CB_justificante1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CB_justificante1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CB_justificante1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -195,15 +186,11 @@ void llena_Descripion(){
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> CB_justificante;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> CB_justificante1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextArea txt_desc;
+    private javax.swing.JLabel jLabel5;
     // End of variables declaration//GEN-END:variables
 }
