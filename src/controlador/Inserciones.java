@@ -55,4 +55,24 @@ public class Inserciones {
               + "WHERE DFECHNL=?";
         return sql;
     }
+    
+    public String InsertarDiasInhabiles(){
+        String sql;
+        sql = "INSERT INTO mdiasnl (DFECHNL, CMOTIVO, CSTATUS)"+
+                "VALUES (?,?,?);";
+        return sql;
+    }
+    public String InsertarJustificante(){
+        String sql;
+        sql = "INSERT INTO cjusasi (NIDTPJU,CDESJUS,CSTATUS)"+
+                "VALUES (?,?,?);";
+        return sql;
+    }
+     
+   public String ModificarJustificante( ){
+        String sql;
+        sql = "UPDATE cjusasi SET CDESJUS=?,CSTATUS=?"
+              + "WHERE NIDTPJU=?";
+        return sql;
+    } 
 }

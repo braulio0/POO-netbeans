@@ -14,5 +14,19 @@ public class Deletes {
             String sql = "DELETE  "
                 + " FROM ddatemp "
                 + " WHERE ccveemp = ?";
-        return sql;    }
+        return sql;    
+    }
+    
+    public String DeteleDNH() {
+            String sql = "DELETE  "
+                + " FROM mdiasnl "
+                + " WHERE DFECHNL = ?";
+        return sql;    
+    }
+    public String DeteleJustificante() {
+            String sql = "DELETE  "
+                + " FROM cjusasi "
+                + " WHERE NIDTPJU = ?";
+        return sql;    
+    }
 }

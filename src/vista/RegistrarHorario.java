@@ -37,6 +37,8 @@ public class RegistrarHorario extends javax.swing.JFrame {
      */
     public RegistrarHorario() {
         initComponents();
+        setLocationRelativeTo(null);
+        setTitle("Registrar  Horario");
         llenaStatus();
         llenardias();
         habilitar();
@@ -231,49 +233,50 @@ void datosHorario(){
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(850, 500));
-        setPreferredSize(new java.awt.Dimension(815, 500));
         getContentPane().setLayout(null);
 
-        jLabel2.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Id Horario");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(90, 50, 80, 15);
+        jLabel2.setBounds(60, 50, 80, 20);
 
-        jLabel3.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Dia de la semana");
         getContentPane().add(jLabel3);
         jLabel3.setBounds(60, 100, 130, 20);
 
-        jLabel4.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Hora de Entrada");
         getContentPane().add(jLabel4);
         jLabel4.setBounds(60, 170, 110, 20);
 
-        jLabel5.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Hora de Salida");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(70, 280, 120, 20);
+        jLabel5.setBounds(350, 180, 120, 20);
 
-        jLabel6.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Horas");
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(180, 200, 80, 15);
+        jLabel6.setBounds(180, 200, 80, 20);
 
-        jLabel7.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Minutos");
         getContentPane().add(jLabel7);
-        jLabel7.setBounds(270, 200, 80, 15);
+        jLabel7.setBounds(270, 200, 80, 20);
 
+        txt_IdHorario.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         txt_IdHorario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_IdHorarioActionPerformed(evt);
@@ -282,6 +285,7 @@ void datosHorario(){
         getContentPane().add(txt_IdHorario);
         txt_IdHorario.setBounds(180, 40, 100, 30);
 
+        CB_Dias.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         CB_Dias.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         CB_Dias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -289,48 +293,55 @@ void datosHorario(){
             }
         });
         getContentPane().add(CB_Dias);
-        CB_Dias.setBounds(180, 100, 150, 23);
+        CB_Dias.setBounds(200, 100, 170, 30);
+
+        txt_horasE.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         getContentPane().add(txt_horasE);
         txt_horasE.setBounds(170, 170, 60, 30);
+
+        txt_minE.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         getContentPane().add(txt_minE);
         txt_minE.setBounds(260, 170, 60, 30);
 
+        txt_HorasS.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         txt_HorasS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_HorasSActionPerformed(evt);
             }
         });
         getContentPane().add(txt_HorasS);
-        txt_HorasS.setBounds(170, 280, 60, 30);
+        txt_HorasS.setBounds(470, 170, 60, 30);
 
-        jLabel8.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Horas");
         getContentPane().add(jLabel8);
-        jLabel8.setBounds(180, 310, 80, 20);
+        jLabel8.setBounds(480, 200, 80, 20);
 
-        jLabel9.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Minutos");
         getContentPane().add(jLabel9);
-        jLabel9.setBounds(270, 310, 80, 15);
+        jLabel9.setBounds(570, 200, 80, 20);
 
+        txt_MinS.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         txt_MinS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_MinSActionPerformed(evt);
             }
         });
         getContentPane().add(txt_MinS);
-        txt_MinS.setBounds(260, 280, 60, 30);
+        txt_MinS.setBounds(560, 170, 60, 30);
 
-        jLabel10.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Descripcion del Horario");
         getContentPane().add(jLabel10);
-        jLabel10.setBounds(380, 20, 210, 30);
+        jLabel10.setBounds(60, 240, 210, 30);
 
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
+        txt_desHor.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txt_desHor.setToolTipText("");
         txt_desHor.setMaximumSize(new java.awt.Dimension(7, 20));
         txt_desHor.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -341,14 +352,15 @@ void datosHorario(){
         jScrollPane1.setViewportView(txt_desHor);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(530, 20, 270, 120);
+        jScrollPane1.setBounds(240, 240, 380, 130);
 
-        jLabel11.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel11.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Status");
         getContentPane().add(jLabel11);
-        jLabel11.setBounds(430, 184, 80, 30);
+        jLabel11.setBounds(450, 100, 80, 30);
 
+        CB_Status.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         CB_Status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         CB_Status.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -356,8 +368,9 @@ void datosHorario(){
             }
         });
         getContentPane().add(CB_Status);
-        CB_Status.setBounds(530, 190, 60, 23);
+        CB_Status.setBounds(560, 102, 100, 30);
 
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jButton1.setText("Guardar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -365,8 +378,9 @@ void datosHorario(){
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(310, 420, 130, 30);
+        jButton1.setBounds(320, 390, 130, 30);
 
+        jButton2.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jButton2.setText("Asignar dia");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -374,8 +388,9 @@ void datosHorario(){
             }
         });
         getContentPane().add(jButton2);
-        jButton2.setBounds(500, 420, 120, 30);
+        jButton2.setBounds(510, 390, 120, 30);
 
+        jButton3.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jButton3.setText("Limpiar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -383,17 +398,19 @@ void datosHorario(){
             }
         });
         getContentPane().add(jButton3);
-        jButton3.setBounds(670, 420, 100, 30);
+        jButton3.setBounds(680, 390, 100, 30);
 
-        jButton4.setText("Nueo Horario");
+        jButton4.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        jButton4.setText("Nuevo Horario");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
             }
         });
         getContentPane().add(jButton4);
-        jButton4.setBounds(150, 420, 110, 30);
+        jButton4.setBounds(160, 390, 110, 30);
 
+        jButton5.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jButton5.setText("Inicio");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -401,11 +418,16 @@ void datosHorario(){
             }
         });
         getContentPane().add(jButton5);
-        jButton5.setBounds(10, 420, 80, 30);
+        jButton5.setBounds(20, 390, 80, 30);
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel12.setText("Registrar horario");
+        getContentPane().add(jLabel12);
+        jLabel12.setBounds(310, 20, 150, 23);
 
         jLabel1.setText("jLabel1");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, -6, 890, 480);
+        jLabel1.setBounds(0, -6, 810, 480);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -471,6 +493,7 @@ public void keyReleased(KeyEvent arg0) {
         txt_MinS.setText("");
         txt_horasE.setText("");
         txt_minE.setText("");
+        txt_desHor.setText("");
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -532,6 +555,7 @@ public void keyReleased(KeyEvent arg0) {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

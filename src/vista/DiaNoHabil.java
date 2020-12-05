@@ -7,9 +7,13 @@ package vista;
 
 import java.awt.Image;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Icon;
@@ -22,13 +26,38 @@ import modelo.Horario;
  * @author emmaf
  */
 public class DiaNoHabil extends javax.swing.JFrame {
-controlador.Conexion con = new controlador.Conexion();
+        controlador.Conexion con = new controlador.Conexion();
         Connection cn  = con.conexion();
+    
+        
+    void Actualizar(){
+    Horario datosHorario;
+    datosHorario = new Horario();
+    controlador.Inserciones consHor;
+    consHor = new controlador.Inserciones();
+    datosHorario.setDFECHNL(CB_fecha.getItemAt(CB_fecha.getSelectedIndex()));
+    JOptionPane.showMessageDialog(null, datosHorario.getDFECHNL());
+    datosHorario.setCSTATUS(CB_Status.getItemAt(CB_Status.getSelectedIndex()));
+    JOptionPane.showMessageDialog(null, datosHorario.getCSTATUS());
+
+    datosHorario.setCMOTIVO(txt_hdesc.getText());
+    try {
+            PreparedStatement pps = cn.prepareStatement(consHor.ModificarDiaNH());
+            pps.setString(1, datosHorario.getCMOTIVO());
+            pps.setString(2, datosHorario.getCSTATUS());
+            pps.setString(3, datosHorario.getDFECHNL() );
+            pps.executeUpdate();
+    }catch(SQLException ex) {
+            Logger.getLogger(ConsultaEmpleados.class.getName()).log(Level.SEVERE, null, ex);
+        }
+   }
     /**
      * Creates new form DiaNoHabil
      */
     public DiaNoHabil() {
         initComponents();
+        setLocationRelativeTo(null);
+        setTitle("Dias inhabiles");
         CB_Status.removeAllItems();
         llena_fechas();
         llena_datos();
@@ -98,44 +127,39 @@ controlador.Conexion con = new controlador.Conexion();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txt_hdesc = new javax.swing.JTextArea();
         CB_Status = new javax.swing.JComboBox<>();
         jButton2 = new javax.swing.JButton();
         CB_fecha = new javax.swing.JComboBox<>();
-        jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
+        jButton5 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txt_hdesc = new javax.swing.JTextArea();
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(720, 450));
         setMinimumSize(new java.awt.Dimension(720, 450));
-        setPreferredSize(new java.awt.Dimension(718, 450));
         getContentPane().setLayout(null);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Fecha ");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(34, 90, 50, 14);
+        jLabel1.setBounds(30, 100, 80, 20);
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Motivo ");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(30, 160, 70, 14);
+        jLabel2.setBounds(30, 170, 180, 20);
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Status ");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(430, 160, 90, 14);
+        jLabel3.setBounds(420, 160, 60, 20);
 
-        txt_hdesc.setColumns(20);
-        txt_hdesc.setRows(5);
-        txt_hdesc.setEnabled(false);
-        jScrollPane1.setViewportView(txt_hdesc);
-
-        getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(110, 160, 260, 60);
-
+        CB_Status.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         CB_Status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         CB_Status.setEnabled(false);
         CB_Status.addActionListener(new java.awt.event.ActionListener() {
@@ -144,8 +168,9 @@ controlador.Conexion con = new controlador.Conexion();
             }
         });
         getContentPane().add(CB_Status);
-        CB_Status.setBounds(490, 150, 58, 23);
+        CB_Status.setBounds(490, 160, 90, 26);
 
+        jButton2.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jButton2.setText("Inicio ");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -153,8 +178,9 @@ controlador.Conexion con = new controlador.Conexion();
             }
         });
         getContentPane().add(jButton2);
-        jButton2.setBounds(40, 330, 73, 24);
+        jButton2.setBounds(90, 300, 100, 30);
 
+        CB_fecha.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         CB_fecha.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         CB_fecha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -162,17 +188,9 @@ controlador.Conexion con = new controlador.Conexion();
             }
         });
         getContentPane().add(CB_fecha);
-        CB_fecha.setBounds(120, 90, 100, 23);
+        CB_fecha.setBounds(120, 90, 120, 30);
 
-        jButton3.setText("Registrar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton3);
-        jButton3.setBounds(170, 330, 120, 24);
-
+        jButton4.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jButton4.setText("Modificar");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -180,14 +198,37 @@ controlador.Conexion con = new controlador.Conexion();
             }
         });
         getContentPane().add(jButton4);
-        jButton4.setBounds(350, 330, 120, 24);
+        jButton4.setBounds(260, 300, 150, 30);
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel12.setText("Dias no habiles");
+        getContentPane().add(jLabel12);
+        jLabel12.setBounds(250, 20, 150, 23);
+
+        jButton5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton5.setText("Eliminar ");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton5);
+        jButton5.setBounds(510, 300, 100, 30);
+
+        txt_hdesc.setColumns(20);
+        txt_hdesc.setRows(5);
+        txt_hdesc.setEnabled(false);
+        jScrollPane2.setViewportView(txt_hdesc);
+
+        getContentPane().add(jScrollPane2);
+        jScrollPane2.setBounds(110, 140, 290, 120);
 
         jLabel4.setText("jLabel4");
         jLabel4.setMaximumSize(new java.awt.Dimension(815, 500));
         jLabel4.setMinimumSize(new java.awt.Dimension(815, 500));
         jLabel4.setPreferredSize(new java.awt.Dimension(815, 500));
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(0, 0, 930, 440);
+        jLabel4.setBounds(0, 0, 800, 470);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -206,15 +247,35 @@ controlador.Conexion con = new controlador.Conexion();
        this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
-
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        ModyElimDiaNoHabil MEDNH = new ModyElimDiaNoHabil();
-        MEDNH.setVisible(true);
-        this.setVisible(false);
+       ModyElimDiaNoHabil visible = new ModyElimDiaNoHabil();
+       visible.setVisible(true);
+       this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+       controlador.Deletes deleHor;
+       deleHor = new controlador.Deletes();
+       SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+       String status = CB_fecha.getItemAt(CB_fecha.getSelectedIndex());
+        try {
+            Date date = formatoFecha.parse(status);
+            long d = date.getTime();
+            java.sql.Date fecha = new java.sql.Date(d);
+            JOptionPane.showMessageDialog(this, fecha);
+             PreparedStatement pps = cn.prepareStatement(deleHor.DeteleDNH());
+             pps.setDate(1, fecha);
+             pps.executeUpdate();
+             JOptionPane.showMessageDialog(this, "Dia eliminado con exito");
+             this.dispose();
+             DiaNoHabil abrir = new DiaNoHabil();
+             abrir.setVisible(true);
+        }catch (ParseException ex) {
+            Logger.getLogger(DiaNoHabil.class.getName()).log(Level.SEVERE, null, ex);
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this,"Fallo al eliminar");
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -255,13 +316,14 @@ controlador.Conexion con = new controlador.Conexion();
     private javax.swing.JComboBox<String> CB_Status;
     private javax.swing.JComboBox<String> CB_fecha;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea txt_hdesc;
+    private javax.swing.JScrollPane jScrollPane2;
+    public javax.swing.JTextArea txt_hdesc;
     // End of variables declaration//GEN-END:variables
 }

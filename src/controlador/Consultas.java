@@ -48,8 +48,7 @@ public class Consultas {
     public String consutaStatusNH( String fecha){
         String sql = "select * from mdiasnl where dfechnl = '"+fecha+"'";
        
-        return sql;
-        
+        return sql;  
     }
     public String consutaStatusHN( String fecha){
         String sql = "select cstatus from mdiasnl where dfechnl = '"+fecha+"'";
@@ -80,8 +79,14 @@ public class Consultas {
         return sql;
     }
     
-    
-
-
-
+    public String consultaCatalogoJudtificanteTotal() {
+        String sql = "SELECT *"
+                + "FROM CJUSASI "
+                + "ORDER BY NIDTPJU ASC";
+        return sql;
+    }
+    public String consutaMotivoJus( int clave){
+        String sql = "select CDESJUS from cjusasi where NIDTPJU = '"+clave+"'";
+        return sql;  
+    }
 }

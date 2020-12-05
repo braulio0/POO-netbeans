@@ -38,25 +38,29 @@ public class Inicio extends javax.swing.JFrame {
      */
     public Inicio() {
         initComponents();
+        setLocationRelativeTo(null);
+        setTitle("Inicio");
         ImageIcon imagen = new ImageIcon( "src/imagen/fondo.jpg");
         Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(jLabel1.getWidth(),jLabel1.getHeight(),Image.SCALE_DEFAULT));
         jLabel1.setIcon(icono);
-        ImageIcon imagen2 = new ImageIcon( "src/imagen/EmpleadoNuevo.png");
+        ImageIcon imagen2 = new ImageIcon( "src/imagen/agregarUsuario.png");
         Icon icono2 = new ImageIcon(imagen2.getImage().getScaledInstance(jLabel2.getWidth(),jLabel2.getHeight(),Image.SCALE_DEFAULT));
         jLabel2.setIcon(icono2);
-        ImageIcon imagen3 = new ImageIcon( "src/imagen/HorarioNuevo.png");
+        ImageIcon imagen3 = new ImageIcon( "src/imagen/nuevoHorario.png");
         Icon icono3 = new ImageIcon(imagen3.getImage().getScaledInstance(jLabel3.getWidth(),jLabel3.getHeight(),Image.SCALE_DEFAULT));
         jLabel3.setIcon(icono3);
-        ImageIcon imagen4 = new ImageIcon( "src/imagen/Descansos.png");
+        ImageIcon imagen4 = new ImageIcon( "src/imagen/diasDescanso.png");
         Icon icono4 = new ImageIcon(imagen4.getImage().getScaledInstance(jLabel4.getWidth(),jLabel4.getHeight(),Image.SCALE_DEFAULT));
         jLabel4.setIcon(icono4);
-        ImageIcon imagen5 = new ImageIcon( "src/imagen/AsignarHorario.png");
+        ImageIcon imagen5 = new ImageIcon( "src/imagen/horarioEmpleado.png");
         Icon icono5 = new ImageIcon(imagen5.getImage().getScaledInstance(jLabel7.getWidth(),jLabel7.getHeight(),Image.SCALE_DEFAULT));
         jLabel7.setIcon(icono5);
-        ImageIcon imagen6 = new ImageIcon( "src/imagen/SubirRegistro.png");
+        ImageIcon imagen6 = new ImageIcon( "src/imagen/subirArchivo.png");
         Icon icono6 = new ImageIcon(imagen6.getImage().getScaledInstance(jLabel6.getWidth(),jLabel6.getHeight(),Image.SCALE_DEFAULT));
         jLabel6.setIcon(icono6);
-        
+        ImageIcon imagen7 = new ImageIcon( "src/imagen/justificante.png");
+        Icon icono7 = new ImageIcon(imagen7.getImage().getScaledInstance(jLabel9.getWidth(),jLabel9.getHeight(),Image.SCALE_DEFAULT));
+        jLabel9.setIcon(icono7);
     }
     
 private String abrirArchivo(){
@@ -149,22 +153,21 @@ private String abrirArchivo(){
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jButton6 = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(840, 583));
         setMinimumSize(new java.awt.Dimension(833, 534));
-        setPreferredSize(new java.awt.Dimension(833, 534));
         getContentPane().setLayout(null);
 
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jButton1.setText("Registrar Horario");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -172,8 +175,9 @@ private String abrirArchivo(){
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(350, 250, 140, 24);
+        jButton1.setBounds(350, 230, 140, 40);
 
+        jButton2.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jButton2.setText("Dias No habiles");
         jButton2.setPreferredSize(new java.awt.Dimension(118, 24));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -182,8 +186,9 @@ private String abrirArchivo(){
             }
         });
         getContentPane().add(jButton2);
-        jButton2.setBounds(620, 250, 120, 24);
+        jButton2.setBounds(110, 420, 150, 40);
 
+        jButton3.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jButton3.setText("Registrar Empleado");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -191,12 +196,19 @@ private String abrirArchivo(){
             }
         });
         getContentPane().add(jButton3);
-        jButton3.setBounds(90, 250, 140, 24);
+        jButton3.setBounds(110, 230, 150, 40);
 
-        jButton4.setText("jButton1");
+        jButton4.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        jButton4.setText("Asignar horarios");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton4);
-        jButton4.setBounds(120, 460, 73, 24);
+        jButton4.setBounds(570, 230, 140, 50);
 
+        jButton5.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jButton5.setText("Subir Archivo de asistencia");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -204,17 +216,13 @@ private String abrirArchivo(){
             }
         });
         getContentPane().add(jButton5);
-        jButton5.setBounds(320, 460, 200, 24);
+        jButton5.setBounds(550, 420, 200, 40);
 
-        jButton6.setText("jButton1");
-        getContentPane().add(jButton6);
-        jButton6.setBounds(660, 460, 73, 24);
-
-        jLabel8.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Agency FB", 1, 48)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Bienvenido");
         getContentPane().add(jLabel8);
-        jLabel8.setBounds(380, 20, 230, 40);
+        jLabel8.setBounds(330, 20, 180, 40);
 
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("label");
@@ -222,7 +230,7 @@ private String abrirArchivo(){
         jLabel7.setMinimumSize(new java.awt.Dimension(171, 99));
         jLabel7.setPreferredSize(new java.awt.Dimension(171, 99));
         getContentPane().add(jLabel7);
-        jLabel7.setBounds(70, 330, 171, 99);
+        jLabel7.setBounds(570, 100, 120, 99);
 
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("label");
@@ -230,15 +238,7 @@ private String abrirArchivo(){
         jLabel6.setMinimumSize(new java.awt.Dimension(171, 99));
         jLabel6.setPreferredSize(new java.awt.Dimension(171, 99));
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(330, 330, 171, 99);
-
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("label");
-        jLabel5.setMaximumSize(new java.awt.Dimension(171, 99));
-        jLabel5.setMinimumSize(new java.awt.Dimension(171, 99));
-        jLabel5.setPreferredSize(new java.awt.Dimension(171, 99));
-        getContentPane().add(jLabel5);
-        jLabel5.setBounds(590, 330, 171, 99);
+        jLabel6.setBounds(580, 300, 150, 110);
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("label");
@@ -246,7 +246,7 @@ private String abrirArchivo(){
         jLabel4.setMinimumSize(new java.awt.Dimension(171, 99));
         jLabel4.setPreferredSize(new java.awt.Dimension(171, 99));
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(590, 120, 171, 99);
+        jLabel4.setBounds(130, 300, 120, 99);
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("label");
@@ -254,7 +254,7 @@ private String abrirArchivo(){
         jLabel3.setMinimumSize(new java.awt.Dimension(171, 99));
         jLabel3.setPreferredSize(new java.awt.Dimension(171, 99));
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(330, 120, 171, 99);
+        jLabel3.setBounds(370, 110, 110, 90);
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("label");
@@ -262,7 +262,25 @@ private String abrirArchivo(){
         jLabel2.setMinimumSize(new java.awt.Dimension(171, 99));
         jLabel2.setPreferredSize(new java.awt.Dimension(171, 99));
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(70, 120, 171, 99);
+        jLabel2.setBounds(140, 100, 120, 99);
+
+        jButton6.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        jButton6.setText("Registrar justificante");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton6);
+        jButton6.setBounds(340, 420, 160, 40);
+
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel9.setText("label");
+        jLabel9.setMaximumSize(new java.awt.Dimension(171, 99));
+        jLabel9.setMinimumSize(new java.awt.Dimension(171, 99));
+        jLabel9.setPreferredSize(new java.awt.Dimension(171, 99));
+        getContentPane().add(jLabel9);
+        jLabel9.setBounds(380, 310, 90, 99);
         getContentPane().add(jLabel1);
         jLabel1.setBounds(0, 0, 840, 535);
 
@@ -289,11 +307,22 @@ private String abrirArchivo(){
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       
-      DiaNoHabil dnh = new DiaNoHabil();
+      AgregarDiaNoLab dnh = new AgregarDiaNoLab();
       dnh.setVisible(true);
       this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        RegistrarJustificantes jus = new RegistrarJustificantes();
+        jus.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        AsignarHorario hora = new AsignarHorario();
+        hora.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -343,9 +372,9 @@ private String abrirArchivo(){
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     // End of variables declaration//GEN-END:variables
 }

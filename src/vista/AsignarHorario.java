@@ -13,11 +13,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
-import modelo.Empleado;
-import modelo.Horario;
+import javax.swing.*;
+import modelo.*;
+import vista.*;
 import vista.ConsultaEmpleados;
 import vista.Inicio;
 import vista.RegistrarEmpleado;
@@ -218,7 +216,7 @@ void LlenarHorario(){
             }
         });
         getContentPane().add(btnLimpiar);
-        btnLimpiar.setBounds(310, 380, 110, 30);
+        btnLimpiar.setBounds(520, 380, 110, 30);
 
         btnGuardar.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         btnGuardar.setText("Guardar");
@@ -228,7 +226,7 @@ void LlenarHorario(){
             }
         });
         getContentPane().add(btnGuardar);
-        btnGuardar.setBounds(460, 380, 110, 30);
+        btnGuardar.setBounds(350, 380, 110, 30);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -261,9 +259,10 @@ void LlenarHorario(){
         jLabel7.setBounds(20, 190, 90, 20);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Asignar horario");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(310, 20, 150, 23);
+        jLabel5.setBounds(320, 20, 150, 23);
 
         jLabel1.setText("jLabel1");
         getContentPane().add(jLabel1);
@@ -290,7 +289,6 @@ void LlenarHorario(){
         txt_cveemp.setText("");
         txt_nombre.setText("");
         txt_idhorario.setText("");
-       // txt_apeuno.setText("");
         txt_hdesc.setText("");
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
@@ -330,6 +328,10 @@ void LlenarHorario(){
                 pps.setString(3, datoHorario.getCSTATUS());
                 pps.executeUpdate();
                 JOptionPane.showMessageDialog(this, "Horario asignado con exito");
+                txt_cveemp.setText("");
+                txt_nombre.setText("");
+                txt_idhorario.setText("");
+                txt_hdesc.setText("");
             }catch (SQLException ex) {
             if(ex.getErrorCode() == MYSQL_DUPLICATE_PK ){
                 JOptionPane.showMessageDialog(this, "El empleado ya tiene asignado ese horario");

@@ -30,15 +30,17 @@ controlador.Conexion con = new controlador.Conexion();
      */
     public ModyElimDiaNoHabil() {
         initComponents();
+        setLocationRelativeTo(null);
+        setTitle("Modificar eliminar");
         CB_fechas.removeAllItems();
         llena_fechas();
         llenaStatus();
-        inhabil();
+        //inhabil();
         ImageIcon imagen = new ImageIcon( "src/imagen/fondo.jpg");
         Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(jLabel2.getWidth(),jLabel2.getHeight(),Image.SCALE_DEFAULT));
         jLabel2.setIcon(icono);
     }
-    void habil(){
+    /*void habil(){
         txt_hdesc.setEditable(true);
         CB_status.setEnabled(true);
     }
@@ -47,7 +49,7 @@ controlador.Conexion con = new controlador.Conexion();
         CB_status.setEnabled(false);
         jButton1.setEnabled(false);
         
-    }
+    }*/
     void llena_fechas(){
         controlador.Consultas consfecha;
         consfecha = new controlador.Consultas();
@@ -107,11 +109,7 @@ controlador.Conexion con = new controlador.Conexion();
     controlador.Inserciones consHor;
     consHor = new controlador.Inserciones();
     datosHorario.setDFECHNL(CB_fechas.getItemAt(CB_fechas.getSelectedIndex()));
-        JOptionPane.showMessageDialog(null, datosHorario.getDFECHNL());
-
     datosHorario.setCSTATUS(CB_status.getItemAt(CB_status.getSelectedIndex()));
-        JOptionPane.showMessageDialog(null, datosHorario.getCSTATUS());
-
     datosHorario.setCMOTIVO(txt_hdesc.getText());
     try {
             PreparedStatement pps = cn.prepareStatement(consHor.ModificarDiaNH());
@@ -119,6 +117,7 @@ controlador.Conexion con = new controlador.Conexion();
             pps.setString(2, datosHorario.getCSTATUS());
             pps.setString(3, datosHorario.getDFECHNL() );
             pps.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Modificado correctamente");
     }catch(SQLException ex) {
             Logger.getLogger(ConsultaEmpleados.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -141,47 +140,52 @@ controlador.Conexion con = new controlador.Conexion();
         CB_status = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(700, 515));
         setMinimumSize(new java.awt.Dimension(700, 515));
-        setPreferredSize(new java.awt.Dimension(700, 515));
         getContentPane().setLayout(null);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Fecha ID");
+        jLabel1.setText("Fecha inhabil");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(40, 30, 100, 14);
+        jLabel1.setBounds(40, 70, 100, 20);
 
-        CB_fechas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        CB_fechas.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        CB_fechas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
         CB_fechas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CB_fechasActionPerformed(evt);
             }
         });
         getContentPane().add(CB_fechas);
-        CB_fechas.setBounds(190, 30, 120, 23);
+        CB_fechas.setBounds(160, 70, 170, 26);
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Descripcion ");
+        jLabel3.setText("Motivo");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(30, 120, 61, 14);
-        getContentPane().add(txt_hdesc);
-        txt_hdesc.setBounds(160, 110, 280, 100);
+        jLabel3.setBounds(40, 120, 100, 20);
 
+        txt_hdesc.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        getContentPane().add(txt_hdesc);
+        txt_hdesc.setBounds(160, 110, 280, 110);
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Status");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(50, 250, 31, 14);
+        jLabel4.setBounds(50, 250, 45, 20);
 
-        CB_status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        CB_status.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        CB_status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "I" }));
         getContentPane().add(CB_status);
-        CB_status.setBounds(170, 250, 58, 23);
+        CB_status.setBounds(170, 250, 110, 26);
 
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton1.setText("Guardar ");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -189,8 +193,9 @@ controlador.Conexion con = new controlador.Conexion();
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(130, 440, 80, 24);
+        jButton1.setBounds(180, 310, 90, 28);
 
+        jButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton2.setText("Consultar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -198,28 +203,26 @@ controlador.Conexion con = new controlador.Conexion();
             }
         });
         getContentPane().add(jButton2);
-        jButton2.setBounds(240, 440, 110, 24);
+        jButton2.setBounds(360, 310, 110, 28);
 
-        jButton3.setText("Modificar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jButton5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton5.setText("Inicio");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jButton5ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3);
-        jButton3.setBounds(375, 440, 100, 24);
-
-        jButton4.setText("Eliminar ");
-        getContentPane().add(jButton4);
-        jButton4.setBounds(490, 440, 75, 24);
-
-        jButton5.setText("Inicio");
         getContentPane().add(jButton5);
-        jButton5.setBounds(30, 440, 70, 24);
+        jButton5.setBounds(20, 310, 70, 28);
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel5.setText("Modificar dia no laborable");
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(250, 30, 184, 20);
 
         jLabel2.setText("jLabel2");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(0, -6, 730, 500);
+        jLabel2.setBounds(0, -6, 700, 520);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -235,14 +238,18 @@ controlador.Conexion con = new controlador.Conexion();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       Actualizar();
-        inhabil();
+       if(txt_hdesc.getText().equals("")){
+         JOptionPane.showMessageDialog(null, "La descripcion no debe quedar vacia");  
+       }else{
+           Actualizar();
+       }  
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        jButton1.setEnabled(true);
-                habil();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        Inicio ini = new Inicio();
+        ini.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -284,13 +291,12 @@ controlador.Conexion con = new controlador.Conexion();
     private javax.swing.JComboBox<String> CB_status;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JTextField txt_hdesc;
     // End of variables declaration//GEN-END:variables
 }

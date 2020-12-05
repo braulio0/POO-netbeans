@@ -33,6 +33,8 @@ public class RegistrarEmpleado extends javax.swing.JFrame {
     
     public RegistrarEmpleado() {
         initComponents();
+        setLocationRelativeTo(null);
+        setTitle("Registrar empleado");
         llena_estados();
          ImageIcon imagen = new ImageIcon( "src/imagen/fondo.jpg");
         Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(jLabel14.getWidth(),jLabel14.getHeight(),Image.SCALE_DEFAULT));
@@ -116,12 +118,14 @@ public class RegistrarEmpleado extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         txt_fecing = new javax.swing.JTextField();
         jButton5 = new javax.swing.JButton();
+        jLabel15 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(910, 450));
         getContentPane().setLayout(null);
 
+        jButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton2.setText("Limpiar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -129,17 +133,19 @@ public class RegistrarEmpleado extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton2);
-        jButton2.setBounds(340, 380, 69, 24);
+        jButton2.setBounds(350, 340, 81, 30);
 
-        jButton3.setText("Modifiacar Empleado");
+        jButton3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton3.setText("Modificar Empleado");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
         getContentPane().add(jButton3);
-        jButton3.setBounds(460, 380, 160, 24);
+        jButton3.setBounds(490, 340, 160, 30);
 
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton1.setText("Guardar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -147,15 +153,17 @@ public class RegistrarEmpleado extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(190, 380, 75, 24);
+        jButton1.setBounds(190, 340, 110, 30);
 
+        txt_coloni.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txt_coloni.setActionCommand("<Not Set>");
         txt_coloni.setAlignmentX(0.0F);
         txt_coloni.setAlignmentY(0.0F);
         txt_coloni.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         getContentPane().add(txt_coloni);
-        txt_coloni.setBounds(490, 195, 233, 30);
+        txt_coloni.setBounds(90, 240, 233, 30);
 
+        CB_estados.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         CB_estados.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 CB_estadosItemStateChanged(evt);
@@ -180,38 +188,45 @@ public class RegistrarEmpleado extends javax.swing.JFrame {
             }
         });
         getContentPane().add(CB_estados);
-        CB_estados.setBounds(490, 250, 200, 23);
+        CB_estados.setBounds(170, 280, 200, 22);
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Colonia");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(430, 200, 310, 20);
+        jLabel4.setBounds(20, 240, 310, 20);
 
+        CB_municipios.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         getContentPane().add(CB_municipios);
-        CB_municipios.setBounds(490, 290, 283, 23);
+        CB_municipios.setBounds(570, 280, 283, 24);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Seleccione el Estado");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(360, 250, 390, 20);
+        jLabel1.setBounds(20, 280, 390, 20);
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Seleccione el Municipio");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(340, 290, 270, 14);
+        jLabel3.setBounds(390, 280, 270, 20);
 
+        txt_codpos.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txt_codpos.setActionCommand("<Not Set>");
         txt_codpos.setAlignmentX(0.0F);
         txt_codpos.setAlignmentY(0.0F);
         txt_codpos.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         getContentPane().add(txt_codpos);
-        txt_codpos.setBounds(490, 145, 80, 30);
+        txt_codpos.setBounds(520, 240, 100, 30);
 
+        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("Código Postal");
         getContentPane().add(jLabel13);
-        jLabel13.setBounds(410, 150, 200, 20);
+        jLabel13.setBounds(400, 250, 200, 20);
 
+        txt_numint.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txt_numint.setActionCommand("<Not Set>");
         txt_numint.setAlignmentX(0.0F);
         txt_numint.setAlignmentY(0.0F);
@@ -222,37 +237,43 @@ public class RegistrarEmpleado extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txt_numint);
-        txt_numint.setBounds(490, 90, 103, 30);
+        txt_numint.setBounds(760, 190, 70, 30);
 
+        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Num. Interior");
         getContentPane().add(jLabel12);
-        jLabel12.setBounds(410, 100, 90, 14);
+        jLabel12.setBounds(630, 200, 130, 20);
 
+        txt_numext.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txt_numext.setActionCommand("<Not Set>");
         txt_numext.setAlignmentX(0.0F);
         txt_numext.setAlignmentY(0.0F);
         txt_numext.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         getContentPane().add(txt_numext);
-        txt_numext.setBounds(690, 90, 95, 30);
+        txt_numext.setBounds(520, 190, 100, 30);
 
+        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Num. Exterior");
         getContentPane().add(jLabel11);
-        jLabel11.setBounds(610, 100, 90, 14);
+        jLabel11.setBounds(400, 200, 120, 20);
 
+        txt_calle.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txt_calle.setActionCommand("<Not Set>");
         txt_calle.setAlignmentX(0.0F);
         txt_calle.setAlignmentY(0.0F);
         txt_calle.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         getContentPane().add(txt_calle);
-        txt_calle.setBounds(490, 35, 283, 30);
+        txt_calle.setBounds(90, 190, 283, 30);
 
+        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Calle");
         getContentPane().add(jLabel10);
-        jLabel10.setBounds(440, 40, 50, 20);
+        jLabel10.setBounds(20, 190, 50, 20);
 
+        txt_cveemp.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txt_cveemp.setActionCommand("<Not Set>");
         txt_cveemp.setAlignmentX(0.0F);
         txt_cveemp.setAlignmentY(0.0F);
@@ -263,54 +284,63 @@ public class RegistrarEmpleado extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txt_cveemp);
-        txt_cveemp.setBounds(170, 30, 91, 30);
+        txt_cveemp.setBounds(110, 30, 140, 30);
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("* Clave");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(40, 40, 60, 14);
+        jLabel2.setBounds(20, 40, 60, 20);
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Nombre(s)");
+        jLabel5.setText("Direccion");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(30, 90, 70, 14);
+        jLabel5.setBounds(20, 140, 160, 23);
 
+        txt_nombre.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txt_nombre.setActionCommand("<Not Set>");
         txt_nombre.setAlignmentX(0.0F);
         txt_nombre.setAlignmentY(0.0F);
         txt_nombre.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         getContentPane().add(txt_nombre);
-        txt_nombre.setBounds(170, 80, 116, 30);
+        txt_nombre.setBounds(110, 70, 140, 30);
 
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Primer Apellido");
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(20, 140, 130, 14);
+        jLabel6.setBounds(270, 80, 130, 20);
 
+        txt_apeuno.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txt_apeuno.setActionCommand("<Not Set>");
         txt_apeuno.setAlignmentX(0.0F);
         txt_apeuno.setAlignmentY(0.0F);
         txt_apeuno.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         getContentPane().add(txt_apeuno);
-        txt_apeuno.setBounds(170, 130, 132, 30);
+        txt_apeuno.setBounds(390, 70, 190, 30);
 
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Segundo Apellido");
         getContentPane().add(jLabel7);
-        jLabel7.setBounds(10, 180, 140, 14);
+        jLabel7.setBounds(610, 80, 140, 17);
 
+        txt_apedos.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txt_apedos.setActionCommand("<Not Set>");
         txt_apedos.setAlignmentX(0.0F);
         txt_apedos.setAlignmentY(0.0F);
         txt_apedos.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         getContentPane().add(txt_apedos);
-        txt_apedos.setBounds(170, 170, 175, 30);
+        txt_apedos.setBounds(740, 70, 130, 30);
 
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("CURP");
         getContentPane().add(jLabel8);
-        jLabel8.setBounds(60, 220, 70, 14);
+        jLabel8.setBounds(270, 40, 70, 20);
 
+        txt_curp.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txt_curp.setActionCommand("<Not Set>");
         txt_curp.setAlignmentX(0.0F);
         txt_curp.setAlignmentY(0.0F);
@@ -326,8 +356,9 @@ public class RegistrarEmpleado extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txt_curp);
-        txt_curp.setBounds(170, 210, 153, 30);
+        txt_curp.setBounds(390, 30, 190, 30);
 
+        jButton4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton4.setText("Consultar Empleado");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -335,13 +366,15 @@ public class RegistrarEmpleado extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton4);
-        jButton4.setBounds(660, 380, 160, 24);
+        jButton4.setBounds(720, 340, 160, 30);
 
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Fecha de Ingreso");
         getContentPane().add(jLabel9);
-        jLabel9.setBounds(20, 250, 150, 20);
+        jLabel9.setBounds(610, 40, 150, 20);
 
+        txt_fecing.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txt_fecing.setActionCommand("<Not Set>");
         txt_fecing.setAlignmentX(0.0F);
         txt_fecing.setAlignmentY(0.0F);
@@ -352,8 +385,9 @@ public class RegistrarEmpleado extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txt_fecing);
-        txt_fecing.setBounds(170, 250, 86, 30);
+        txt_fecing.setBounds(740, 30, 130, 30);
 
+        jButton5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton5.setText("Inicio");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -361,11 +395,17 @@ public class RegistrarEmpleado extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton5);
-        jButton5.setBounds(50, 380, 59, 24);
+        jButton5.setBounds(20, 340, 80, 30);
+
+        jLabel15.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setText("Nombre(s)");
+        getContentPane().add(jLabel15);
+        jLabel15.setBounds(20, 80, 100, 20);
 
         jLabel14.setText("fondo");
         getContentPane().add(jLabel14);
-        jLabel14.setBounds(-3, 0, 910, 430);
+        jLabel14.setBounds(0, 0, 990, 470);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -426,6 +466,18 @@ public class RegistrarEmpleado extends javax.swing.JFrame {
             pps.setString(14, "A");
             pps.executeUpdate();
             JOptionPane.showMessageDialog(this, "Empleado regustrado con exito");
+            txt_cveemp.setText("");
+            txt_nombre.setText("");
+            txt_apeuno.setText("");
+            txt_apedos.setText("");
+            txt_curp.setText("");
+            txt_fecing.setText("");
+            txt_calle.setText("");
+            txt_numext.setText("");
+            txt_numint.setText("");
+            txt_codpos.setText("");
+            txt_coloni.setText("");
+            
         } catch (SQLException ex) {
             if(ex.getErrorCode() == MYSQL_DUPLICATE_PK ){
                 JOptionPane.showMessageDialog(this, "Clave de usuario ya existe");
@@ -580,6 +632,7 @@ public void keyReleased(KeyEvent arg0) {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
